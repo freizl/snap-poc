@@ -1,0 +1,3 @@
+.border-free-table td, th {
+    border: 0 !important;    
+}

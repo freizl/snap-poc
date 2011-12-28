@@ -1,0 +1,247 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"t",
+				"tags"
+			],
+			[
+				"c",
+				"content"
+			],
+			[
+				"a",
+				"author"
+			],
+			[
+				"ta",
+				"tags"
+			],
+			[
+				"p",
+				"publicDate"
+			],
+			[
+				"check",
+				"checkCols"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "blog.cabal",
+			"settings":
+			{
+				"buffer_size": 1657,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 45.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 115.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/garriot/Workspaces/Haskell/snap/Blog/src/Site.hs",
+		"/Users/garriot/testmonad.hs",
+		"/Users/garriot/Workspaces/repository/bootstrap/bootstrap/examples/fac.hs",
+		"/Users/garriot/Workspaces/repository/bootstrap/bootstrap/examples/fac1.hs",
+		"/Users/garriot/Library/Application Support/Sublime Text 2/Packages/User/Global.sublime-settings",
+		"/Users/garriot/Library/Application Support/Sublime Text 2/Packages/Default/Global.sublime-settings",
+		"/Users/garriot/Workspaces/repository/bootstrap/bootstrap/examples/container-app.html",
+		"/Users/garriot/euler11.hs",
+		"/Users/garriot/testdata.hs",
+		"/Users/garriot/yi12.hs",
+		"/Users/garriot/fib.hs",
+		"/Users/garriot/Workspaces/Haskell/snap/Blog/.ghci",
+		"/Users/garriot/Workspaces/Haskell/snap/Blog/resources/templates/index.tpl",
+		"/Users/garriot/Workspaces/Haskell/snap/Blog/src/Application.hs",
+		"/Users/garriot/Workspaces/Haskell/snap/Blog/src/Models.hs",
+		"/Users/garriot/Workspaces/Haskell/snap/Blog/src/Handlers.hs",
+		"/Users/garriot/Workspaces/Haskell/snap/Blog/src/Main.hs",
+		"/Users/garriot/Workspaces/Haskell/snap/Blog/resources/templates/echo.tpl",
+		"/Users/garriot/Workspaces/Haskell/snap/Blog/Blog.cabal",
+		"/Users/garriot/Workspaces/repository/bootstrap/bootstrap/bootstrap.css",
+		"/Users/garriot/Workspaces/Haskell/snap/Blog/src/Handler.hs",
+		"/Users/garriot/Workspaces/Haskell/yesod/blog/Blog/Application.hs",
+		"/Users/garriot/Workspaces/Haskell/yesod/blog/Blog/Foundation.hs",
+		"/Users/garriot/Workspaces/Haskell/yesod/blog/Blog/Settings.hs",
+		"/Users/garriot/Workspaces/Haskell/yesod/blog/Blog/Blog.cabal",
+		"/Users/garriot/Workspaces/Haskell/yesod/blog/Blog/config/settings.yml",
+		"/Users/garriot/Workspaces/Haskell/yesod/blog/Blog/config/routes",
+		"/Users/garriot/Workspaces/Haskell/yesod/blog/Blog/config/mongoDB.yml",
+		"/Users/garriot/Workspaces/Haskell/yesod/blog/Blog/config/models",
+		"/Users/garriot/Workspaces/Haskell/yesod/blog/Blog/Model.hs",
+		"/Users/garriot/Workspaces/Haskell/yesod/blog/Blog/main.hs",
+		"/Users/garriot/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/garriot/Desktop/sudoku.hs",
+		"/Users/garriot/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap"
+	],
+	"find":
+	{
+		"height": 33.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"theme",
+			"appPort",
+			"alt+right",
+			"auto_complete",
+			"ctrl+space",
+			"right",
+			"complete",
+			"] "
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "blog.cabal",
+					"settings":
+					{
+						"buffer_size": 1657,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								946,
+								946
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 27.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}
