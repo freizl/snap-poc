@@ -1,9 +1,9 @@
 
-<apply template="wrap">
+<apply template="index">
 
   <bind tag="subtitle">: Product Detail</bind>
 
-  <div class="container detail-container">
+  <div class="detail-container">
     <h2>Product Detail</h2>
 
     <showProduct>
@@ -17,11 +17,12 @@
           </tr>
         </table>
       </div>
-      <div class="part2">
-        <p>You wanted me to say this?</p>
-        <p>"<message/>"</p>
-      </div>
     </showProduct>
+
+    <a href="checkout/${pid}" class="checkout">Check Out</a>
+
+    <a href="/">Return</a>
+
   </div>
   
 </apply>

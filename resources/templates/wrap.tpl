@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
   <apply template="page-head"/>
-  <body>
 
+  <body>
+    
     <div id="main">
       <apply template="page-nav"/>
+      
       <content />
-      <div id="footer">
-        <!-- FIXME symbol for copyright -->
-        <p> &copy;Copyright All Rights Reserved.</p>
-      </div>
+      
+      <apply template="page-footer"/>
     </div>
 
     <!-- 
-         <script type="text/javascript" src="/media/js/site.js"> </script>
-         -->
+       <script type="text/javascript" src="/media/js/site.js"> </script>
+    -->
 
   </body>
 </html>

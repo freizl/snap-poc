@@ -24,7 +24,7 @@ import           Models
 
 ------------------------------------------------------------------------------
 index :: Handler App App ()
-index = ifTop $ heistLocal (bindSplices indexSplices) $ render "index"
+index = ifTop $ heistLocal (bindSplices indexSplices) $ render "home"
   where
     indexSplices =
         [ ("start-time",      startTimeSplice)

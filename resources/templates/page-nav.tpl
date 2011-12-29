@@ -1,18 +1,20 @@
 <static>
   <div id="heading">
-    <div class="inner">
-      <div id="nav" class="navxx">
-        <div class="navlist">
-          <ul class="navxx">
-            <li class="home">
-              <a title="Home" href="/">Home</a>
-            </li>
-            <li class="about">
-              <a title="About the Site" href="/about">About</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <div id="nav" class="nav">
+      <ul class="nav">
+        <li class="home">
+          <a title="Home" href="/">Home</a>
+        </li>
+        <li>
+          <a title="Sign in" href="/signin">Sign In</a>
+        </li>
+        <li>
+          <a title="Register" href="/register">Register</a>
+        </li>
+        <li class="Contact">
+          <a title="Contact Us" href="/contact">Contact</a>
+        </li>
+      </ul>
     </div>
   </div>
 </static>
