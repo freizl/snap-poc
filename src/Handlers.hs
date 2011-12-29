@@ -18,12 +18,12 @@ import           Text.Templating.Heist
 import           Text.XmlHtml hiding (render)
 
 import           Application
-import           DBOperation
+import qualified DBOperation as DB       -- ^ Always use qualified or not??
 import           Models
 
 
 ------------------------------------------------------------------------------
-index :: Handler App App ()
+index :: AppHandler ()
 index = ifTop $ heistLocal (bindSplices indexSplices) $ render "home"
   where
     indexSplices =
@@ -35,31 +35,26 @@ index = ifTop $ heistLocal (bindSplices indexSplices) $ render "home"
 
 ------------------------------------------------------------------------------
 -- | get product
--- eeee
-getProduct :: Handler App App ()
+getProduct :: AppHandler ()
 getProduct = do
-    pid <- decodedParam "pid"
-    heistLocal (bindSplices pSplices) $ render "product"
+    pid   <- decodedParam "pid"
+    ps    <- liftIO $ fmap renderDetailP (DB.findProduct pid)
+    heistLocal (bindSplices $ pSplices ps) $ render "product"
   where
-    decodedParam p = fromMaybe "" <$> getParam p
-    pSplices       = [("showProduct", getProduct')]
+    pSplices  s = [("showProduct", s)]
 
-getProduct' :: Splice AppHandler
-getProduct' = do
-    p <- return (products !! (read "1"))
-    renderDetailP p
-    
-renderDetailP  =  renderP
-
+renderDetailP :: Product -> Splice AppHandler
+renderDetailP = renderP
 
 ------------------------------------------------------------------------------
 
 popProductsSplice :: Splice AppHandler
 popProductsSplice = do
-    ps <- return products
+    ps <- liftIO $ DB.products
     mapSplices renderP ps
     
--- | FIXME: producst usally display as 'matrix' rather than simple list
+-- | FIXME: producst usally display as 'matrix(3 items per line)' 
+--          and pagination rather than simple list
 renderP :: Monad m => Product -> Splice m    
 renderP p = do runChildrenWithText [("pname", T.pack $ pname p), ("pid", T.pack $ pid p)]
 
@@ -70,7 +65,7 @@ defaultSplices = [ ("tagsList", tagsListSplice)]
 tagsListSplice :: Splice AppHandler
 tagsListSplice = do
     pipe <- gets _dbPipe
-    tags <- liftIO $ getAllTags pipe
+    tags <- liftIO $ DB.getAllTags pipe
     mapSplices renderTag tags
 
 renderTag:: Monad m => Tag -> Splice m
@@ -100,16 +95,13 @@ echo :: Handler App App ()
 echo = do
     message <- decodedParam "stuff"
     heistLocal (bindString "message" (T.decodeUtf8 message)) $ render "echo"
-  where
-    decodedParam p = fromMaybe "" <$> getParam p
-
 
 ------------------------------------------------------------------------------
 -- | The application's routes.
 routes :: [(ByteString, Handler App App ())]
 routes = [ ("/",            index)
          , ("/echo/:stuff", echo)
-         , ("/product/:id",getProduct)
+         , ("/product/:pid",getProduct)
          ]
          <|>
          -- FIXME: admin subsite like staticPagesSite
@@ -117,3 +109,8 @@ routes = [ ("/",            index)
          , ("", serveDirectory "resources/static")
          ]
 
+------------------------------------------------------------------------------
+-- UTIL
+
+-- decodedParam :: MonadSnap f => ByteString -> f ByteString
+decodedParam p = fromMaybe "" <$> getParam p

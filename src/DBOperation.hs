@@ -2,6 +2,10 @@
 
 module DBOperation where
 
+import           Data.ByteString (ByteString)
+import qualified Data.Text as T
+import qualified Data.Text.Encoding as T
+
 import Database.MongoDB
 
 import Models
@@ -18,5 +22,20 @@ getAllTags pipe = do
         datas (Right results) = map convert results
         convert result = Tag { oid = show $ valueAt "_id" result, name = show $ valueAt "name" result}
         
-products :: [Product]
-products = zipWith Product ["1","2","3"] ["Gorriot","Ray","Simon"]
+-- | FIXME: pull DB
+products :: IO [Product]
+products = return $ zipWith Product ["1","2","3"] ["Gorriot","Ray","Simon"]
+
+-- | FIXME: pull DB
+--          return IO Maybe Product
+findProduct :: ByteString -> IO Product
+findProduct input = fmap findP products
+  where
+    input' = bs2String input
+    eqPid = (== input') . pid
+    findP = (head . filter eqPid)
+
+-- | ByteString to String
+--   exists functions? or really necessary
+bs2String :: ByteString -> String
+bs2String = T.unpack . T.decodeUtf8

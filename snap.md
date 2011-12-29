@@ -1,10 +1,12 @@
 # TODO
-1. testing data (json?)
-2. persiste change to mongodb
-3. dir structure refactoring?
+  # display detail
+  # checkout
+  # testing data (json?)
+  # persiste change to mongodb
+  # src dir structure refactoring?
+  # Minify JS and CSS
 
 # Questions
-1. <static> tag
 2. StaticPages src
   HasHeist
   SnapletInit
@@ -12,6 +14,14 @@
 3. snap-site src 
   makeSnaplet
   nestSnaplet
+  ifTop
+  bindSplices
+  mapSplices
+
+4. Heist
+  heistLocal
+  <static> tag
+
 
 
 # dir structure
@@ -37,8 +47,7 @@ src (Types / Handler / Application )
   - List products at home page
   - View detail of a product
   - Check out a product without login
-  - User be able to update ordering status
-  - when received
+  - User be able to update ordering status when received
 
 ### DATA MODEL
   - Product {ID, NAME, PRICE}
