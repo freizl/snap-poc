@@ -15,7 +15,8 @@ nestSnaplet
 
 # dir structure
 
-design every sub site as snaplet ? check existing snaplets
+design every sub site as snaplet ? check existing snaplets(mongodb)
+or following  staticPages, is it a snaplet as well?
 
  (Types / Handler / Application )
 src

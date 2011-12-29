@@ -1,8 +1,13 @@
 module Main where
 
-main = print $ DP "simon" "wu"
+-- FIXME: import ../src/Models.hs
 
-data TP = DP 
-    { firstName :: String
-    , lastName  :: String
-    } deriving(Eq,Show)
+main = print $ Product "simon" "wu"
+
+data Product = Product
+    { pid   :: Num     -- ^ oid
+    , pname :: String     -- ^ Product name
+    } deriving (Show)
+                      
+products :: [Product]
+products = zipWith Product [1,2,3] ["Simon","Ray","John"]

@@ -17,3 +17,6 @@ getAllTags pipe = do
         datas (Left _) = []
         datas (Right results) = map convert results
         convert result = Tag { oid = show $ valueAt "_id" result, name = show $ valueAt "name" result}
+        
+products :: [Product]
+products = zipWith Product ["1","2","3"] ["Gorriot","Ray","Simon"]

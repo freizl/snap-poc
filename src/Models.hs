@@ -13,7 +13,7 @@ data Config = Config
     } deriving (Show)
 
 data Product = Product
-    { oid  :: String     -- ^ oid
-    , name :: String     -- ^ Product name
+    { pid   :: String     -- ^ oid
+    , pname :: String     -- ^ Product name
     } deriving (Show)
                       

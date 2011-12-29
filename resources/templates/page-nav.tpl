@@ -1,9 +1,9 @@
 <static>
   <div id="heading">
     <div class="inner">
-      <div id="nav" class="nav">           
+      <div id="nav" class="navxx">
         <div class="navlist">
-          <ul class="nav">
+          <ul class="navxx">
             <li class="home">
               <a title="Home" href="/">Home</a>
             </li>

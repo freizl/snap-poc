@@ -22,9 +22,6 @@ import           DBOperation
 import           Models
 
 
-products :: [Product]
-products = zipWith Product [1,2,3] ["Simon","Ray","John"]
-
 ------------------------------------------------------------------------------
 index :: Handler App App ()
 index = ifTop $ heistLocal (bindSplices indexSplices) $ render "index"
@@ -42,15 +39,14 @@ index = ifTop $ heistLocal (bindSplices indexSplices) $ render "index"
 getProduct :: Handler App App ()
 getProduct = do
     pid <- decodedParam "pid"
-    heistLocal (bindSplices pSplices) $ render "echo"
+    heistLocal (bindSplices pSplices) $ render "product"
   where
     decodedParam p = fromMaybe "" <$> getParam p
     pSplices       = [("showProduct", getProduct')]
 
-    =                     
-getProduct' :: String -> Splice AppHandler
-getProduct' pid = do
-    p <- return (products !! pid)
+getProduct' :: Splice AppHandler
+getProduct' = do
+    p <- return (products !! (read "1"))
     renderDetailP p
     
 renderDetailP  =  renderP
@@ -64,7 +60,8 @@ popProductsSplice = do
     mapSplices renderP ps
     
 -- | FIXME: producst usally display as 'matrix' rather than simple list
-renderP p = do runChildrenWithText [("name", T.pack $ name p), ("oid", T.pack $ oid p)]
+renderP :: Monad m => Product -> Splice m    
+renderP p = do runChildrenWithText [("pname", T.pack $ pname p), ("pid", T.pack $ pid p)]
 
 
 ------------------------------------------------------------------------------
@@ -112,7 +109,7 @@ echo = do
 routes :: [(ByteString, Handler App App ())]
 routes = [ ("/",            index)
          , ("/echo/:stuff", echo)
-         , ("/products/:id",getProduct)
+         , ("/product/:id",getProduct)
          ]
          <|>
          -- FIXME: admin subsite like staticPagesSite

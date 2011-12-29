@@ -6,11 +6,10 @@
     <div id="main">
       <apply template="page-nav"/>
       <content />
-    </div>
-
-    <div id="footer">
-      <!-- FIXME symbol for copyright -->
-       <p> @Copyright All Rights Reserved.</p>
+      <div id="footer">
+        <!-- FIXME symbol for copyright -->
+        <p> &copy;Copyright All Rights Reserved.</p>
+      </div>
     </div>
 
     <!-- 

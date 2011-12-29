@@ -3,7 +3,9 @@
 
   <bind tag="subtitle">: Product Detail</bind>
 
-  <div class="detail-container">
+  <div class="container detail-container">
+    <h2>Product Detail</h2>
+
     <showProduct>
       <div class="part-1">
         <table>

@@ -8,22 +8,22 @@
       <div class="row">
           <div class="span12">
             
-            <popProductsSplice>
+            <popularProducts>
               <table class="border-free-table">
                 <tbody>
                   <tr>
-                    <td><h5>${name}</h5></td>
+                    <td><h5><pname/></h5><a href="${pname}">tst</a></td>
                   </tr>
                   <tr>
-                    <td>ID: ${oid}, NAME: ${name}</td>
+                    <td>ID: <pid/>, NAME: <pname/></td>
                   </tr>
                   <tr>
-                    <td><big><a href="/product/${oid}">More></a></big> </td>
+                    <td><big><a href="/product/${pid}">More..</a></big> </td>
                   </tr>
                 </tbody>
               </table>
               <hr>
-            </popProductsSplice>
+            </popularProducts>
           </div>
           
           <div class="span4">
