@@ -19,7 +19,6 @@
           </tr>
         </table>
         <a href="checkout/${pid}" class="checkout">Check Out</a>
-
       </div>
     </showProduct>
 

@@ -34,7 +34,26 @@ index = ifTop $ heistLocal (bindSplices indexSplices) $ render "home"
 
 
 ------------------------------------------------------------------------------
--- | get product
+-- | Renders the echo page.
+echo :: Handler App App ()
+echo = do
+    message <- decodedParam "stuff"
+    heistLocal (bindString "message" (T.decodeUtf8 message)) $ render "echo"
+
+------------------------------------------------------------------------------
+-- | checkout
+checkout :: AppHandler ()
+checkout = do
+    pid   <- decodedParam "pid"
+    ps    <- liftIO $ fmap renderDetailP (DB.findProduct pid)
+    heistLocal (bindSplices $ pSplices ps) $ render "checkout"
+  where
+    pSplices  s = [("showProduct", s)
+                  ,("current-time", currentTimeSplice)
+                  ]
+
+------------------------------------------------------------------------------
+-- | Get product
 getProduct :: AppHandler ()
 getProduct = do
     pid   <- decodedParam "pid"
@@ -47,7 +66,7 @@ renderDetailP :: Product -> Splice AppHandler
 renderDetailP = renderP
 
 ------------------------------------------------------------------------------
-
+-- | List products 
 popProductsSplice :: Splice AppHandler
 popProductsSplice = do
     ps <- liftIO $ DB.products
@@ -90,18 +109,16 @@ currentTimeSplice = do
 
 
 ------------------------------------------------------------------------------
--- | Renders the echo page.
-echo :: Handler App App ()
-echo = do
-    message <- decodedParam "stuff"
-    heistLocal (bindString "message" (T.decodeUtf8 message)) $ render "echo"
-
-------------------------------------------------------------------------------
 -- | The application's routes.
 routes :: [(ByteString, Handler App App ())]
 routes = [ ("/",            index)
          , ("/echo/:stuff", echo)
          , ("/product/:pid",getProduct)
+         ]
+         <|>
+         -- Checkout sub-site
+         [
+           ("/product/checkout/:pid", checkout)
          ]
          <|>
          -- FIXME: admin subsite like staticPagesSite
