@@ -1,16 +1,17 @@
+# TODO
+1. testing data (json?)
+2. persiste change to mongodb
+3. dir structure refactoring?
+
 # Questions
-
 1. <static> tag
-
 2. StaticPages src
   HasHeist
   SnapletInit
   what mean by `addRoutes [ ("", serveStaticPages) ]` since the router url is empty
-  
 3. snap-site src 
-makeSnaplet
-nestSnaplet
-
+  makeSnaplet
+  nestSnaplet
 
 
 # dir structure
@@ -18,14 +19,37 @@ nestSnaplet
 design every sub site as snaplet ? check existing snaplets(mongodb)
 or following  staticPages, is it a snaplet as well?
 
- (Types / Handler / Application )
-src
- - Internal
- - Home
- - Products
- - About
- - Contact
- - Main.hs
- - Application.hs
+src (Types / Handler / Application )
 
-# TODO
+  - Internal
+  - Home
+  - Products
+  - About
+  - Contact
+  - Main.hs
+  - Application.hs
+
+# Some thinkings
+### BACKLOG
+  - ADMIN-Add new product
+  - ADMIN-Delete/Update a product
+  - ADMIN-List all product
+  - List products at home page
+  - View detail of a product
+  - Check out a product without login
+  - User be able to update ordering status
+  - when received
+
+### DATA MODEL
+  - Product {ID, NAME, PRICE}
+  - Order {ID, NAME, PRODUCT-ID, STATUS}
+  - ??more
+
+### MORE THAN A POC
+  - payment service
+  - delivery method?
+  - App deployment/upgrade
+
+
+# OTHER OPTION
+  - Scala + Lift
