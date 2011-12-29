@@ -1,4 +1,4 @@
-<apply template="wrap">
+<apply template="page">
 
   <div id="container">
     <h1>All nice things</h1>

@@ -1,5 +1,5 @@
 
-<apply template="wrap">
+<apply template="default">
   
   <bind tag="subtitle">: Echo Something</bind>
   

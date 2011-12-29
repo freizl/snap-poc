@@ -1,5 +1,5 @@
 
-<apply template="index">
+<apply template="default">
 
   <bind tag="subtitle">: Product Detail</bind>
 
