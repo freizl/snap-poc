@@ -12,8 +12,9 @@
   SnapletInit
   what mean by `addRoutes [ ("", serveStaticPages) ]` since the router url is empty
 3. snap-site src 
-  makeSnaplet
-  nestSnaplet
+  makeSnaplet :: Text -> Text -> Maybe (IO FilePath) -> Initializer b v v -> SnapletInit b v
+  nestSnaplet :: ByteString -> (Lens v (Snaplet v1)) -> SnapletInit b v1 -> Initializer b v (Snaplet v1)
+  addRoutes   :: [(ByteString, Handler b v ())] -> Initializer b v ()
   ifTop
   bindSplices
   mapSplices
