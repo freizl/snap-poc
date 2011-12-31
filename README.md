@@ -9,32 +9,35 @@ dive into snap
   - With Heist you can define your own domain-specific HTML and XML tags implemented 
     with Haskell and use them in your templates.
   - [X] play getParamNode
-    > <speech author="Shakespeare">
-    >   To sleep, perchance to dream.
-    > </speech>
   - [ ] understand functor instance of (TemplateMonad m) 
   - heistLocal
   - <static> tag
 
+~~~~~{.haskell}
+> <speech author="Shakespeare">
+>   To sleep, perchance to dream.
+> </speech>
+~~~~~
+
 ## Snaplet
 
 ### work with state
-  - Handler b v has a __MonadState__ v instance
+  - `Handler b v` has a `MonadState v` instance
   - MonadReader
-  - MonadIO, [Functional Programming with Overloading and Higher-Order Polymorphism, Mark P Jones](http://web.cecs.pdx.edu/~mpj/) 
+  - MonadIO, [Functional Programming with Overloading and Higher-Order Polymorphism, Mark P Jones](web.cecs.pdx.edu/~mpj/pubs/springschool95.pdf) 
 
 
 ## StaticPages src
-  HasHeist
-  SnapletInit
-  what mean by `addRoutes [ ("", serveStaticPages) ]` since the router url is empty
-    -- serveStaticPages do some route matching on its own
-    -- see more at snaplet-tutorial : nestSnaplet, talking about how to nested a snaplet
+  - HasHeist
+  - SnapletInit
+  - what mean by `addRoutes [ ("", serveStaticPages) ]` since the router url is empty
+    - serveStaticPages do some route matching on its own
+    - see more at snaplet-tutorial : nestSnaplet, talking about how to nested a snaplet
 
 ## snap-site src 
-  makeSnaplet :: Text -> Text -> Maybe (IO FilePath) -> Initializer b v v -> SnapletInit b v
-  nestSnaplet :: ByteString -> (Lens v (Snaplet v1)) -> SnapletInit b v1 -> Initializer b v (Snaplet v1)
-  addRoutes   :: [(ByteString, Handler b v ())] -> Initializer b v ()
-  ifTop
-  bindSplices
-  mapSplices
+  - `makeSnaplet :: Text -> Text -> Maybe (IO FilePath) -> Initializer b v v -> SnapletInit b v`
+  - `nestSnaplet :: ByteString -> (Lens v (Snaplet v1)) -> SnapletInit b v1 -> Initializer b v (Snaplet v1)`
+  - `addRoutes   :: [(ByteString, Handler b v ())] -> Initializer b v ()`
+  - ifTop
+  - bindSplices
+  - mapSplices
