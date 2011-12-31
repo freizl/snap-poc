@@ -13,9 +13,28 @@ dive into snap
     >   To sleep, perchance to dream.
     > </speech>
   - [ ] understand functor instance of (TemplateMonad m) 
+  - heistLocal
+  - <static> tag
+
 ## Snaplet
 
 ### work with state
   - Handler b v has a __MonadState__ v instance
   - MonadReader
   - MonadIO, [Functional Programming with Overloading and Higher-Order Polymorphism, Mark P Jones](http://web.cecs.pdx.edu/~mpj/) 
+
+
+## StaticPages src
+  HasHeist
+  SnapletInit
+  what mean by `addRoutes [ ("", serveStaticPages) ]` since the router url is empty
+    -- serveStaticPages do some route matching on its own
+    -- see more at snaplet-tutorial : nestSnaplet, talking about how to nested a snaplet
+
+## snap-site src 
+  makeSnaplet :: Text -> Text -> Maybe (IO FilePath) -> Initializer b v v -> SnapletInit b v
+  nestSnaplet :: ByteString -> (Lens v (Snaplet v1)) -> SnapletInit b v1 -> Initializer b v (Snaplet v1)
+  addRoutes   :: [(ByteString, Handler b v ())] -> Initializer b v ()
+  ifTop
+  bindSplices
+  mapSplices
