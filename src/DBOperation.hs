@@ -30,13 +30,12 @@ products :: IO [Product]
 products = return $ zipWith Product ["1","2","3"] ["Gorriot","Ray","Simon"]
 
 -- | FIXME: pull DB
---          return IO Maybe Product
 findProduct :: ByteString -> IO Product
 findProduct input = fmap findP products
   where
     input' = bs2String input
     eqPid = (== input') . pid
-    findP = (head . filter eqPid)
+    findP = (head . filter eqPid)   -- ^ FIXME: head will agianst empty list when pid doesn't exists.
 
 -- saveOrder
 
@@ -51,6 +50,8 @@ orders pipe = do
         convert result = Order { orderId = show $ valueAt "orderId" result, pid = show $ valueAt "pid" result}
 
 -- | ByteString to String
---   exists functions?? or really necessary
+--   exists functions? or really necessary
+-- ?? import qualified Data.ByteString.Char8 as U
+--    :t U.unpack ??
 bs2String :: ByteString -> String
 bs2String = T.unpack . T.decodeUtf8
