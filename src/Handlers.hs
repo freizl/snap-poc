@@ -29,6 +29,7 @@ index = ifTop $ heistLocal (bindSplices indexSplices) $ render "home"
     indexSplices =
         [ ("start-time",      startTimeSplice)
         , ("current-time",    currentTimeSplice)
+        , ("debug-info",      debugSplice)
         , ("popularProducts", popProductsSplice)
         ] ++ defaultSplices
 
@@ -44,9 +45,9 @@ echo = do
 -- | checkoutDone
 checkoutDone :: AppHandler ()    
 checkoutDone = do
-    pid   <- decodedParam "pid"
-    -- FIXME Save order
-    heistLocal (bindString "message" (T.decodeUtf8 "check out done.")) $ render "echo"
+    pid  <- decodedParam "pid"
+    od   <- liftIO $ DB.saveOrder pid
+    heistLocal (bindString "message" (T.pack $ show od)) $ render "echo"
 
 -- | checkout
 checkout :: AppHandler ()
@@ -114,25 +115,34 @@ currentTimeSplice = do
     time <- liftIO getCurrentTime
     return $ [TextNode $ T.pack $ show $ time]
 
-
+------------------------------------------------------------------------------
+-- | Demostrate how to get parameter of a tag
+--   Given the node like: <debug-info author="Simon">2</debug-info>    
+debugSplice :: Splice AppHandler
+debugSplice = do
+    input <- getParamNode
+    liftIO $ print $ childNodes input
+    liftIO $ print $ getAttribute "author" input
+    return $ [TextNode $ T.pack $ show "Debug: "]
+    
 ------------------------------------------------------------------------------
 -- | The application's routes.
 routes :: [(ByteString, Handler App App ())]
-routes = [ ("/",            index)
-         , ("/echo/:stuff", echo)
-         , ("/product/:pid",getProduct)
+routes = [ ("/",             index)
+         , ("/echo/:stuff",  echo)
+         , ("/product/:pid", getProduct)
          ]
          <|>
-         -- Checkout sub-site
+         -- FIXME: Checkout sub-site
          [
-           ("/checkout/:pid", checkout)
-         , ("/checkout/done/", checkoutDone)
+           ("/checkout/:pid",  method GET checkout)
+         , ("/checkout/done/", method POST checkoutDone)
          ]
          <|>
-         -- FIXME: admin subsite like staticPagesSite
-         [ ("", with heist heistServe)
+         [ ("", with heist heistServe)  -- ^ could be just `"" heistServe`
          , ("", serveDirectory "resources/static")
          ]
+         -- FIXME: admin subsite like staticPagesSite
 
 ------------------------------------------------------------------------------
 -- UTIL

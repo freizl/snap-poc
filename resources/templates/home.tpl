@@ -1,8 +1,7 @@
-<apply template="default">
+<bind tag="subtitle">: Home</bind>
 
-  <bind tag="subtitle">: Home</bind>
-  
-      
+<apply template="default">
+  <p><debug-info author="Simon">2</debug-info></p>
       <div class="content">
         <popularProducts>
           <table class="border-free-table">

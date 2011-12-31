@@ -1,9 +1,10 @@
 # TODO
-  #. checkout (save order form)
-  #. testing data prepare (json?)
-  #. persiste change to mongodb
-  #. Minify JS and CSS
-  #. src dir structure refactoring??
+  #. [ ] snaplet-mongoDB
+  #. [ ] checkout (save order form)
+  #. [ ] testing data prepare (json?)
+  #. [ ] persiste change to mongodb
+  #. [ ] Minify JS and CSS
+  #. [ ] src dir structure refactoring??
 
 # Questions
 #. StaticPages src
@@ -11,6 +12,7 @@
   SnapletInit
   what mean by `addRoutes [ ("", serveStaticPages) ]` since the router url is empty
     -- serveStaticPages do some route matching on its own
+    -- see more at snaplet-tutorial : nestSnaplet, talking about how to nested a snaplet
 
 #. snap-site src 
   makeSnaplet :: Text -> Text -> Maybe (IO FilePath) -> Initializer b v v -> SnapletInit b v

@@ -38,15 +38,10 @@ findProduct input = fmap findP products
     findP = (head . filter eqPid)   -- ^ FIXME: head will agianst empty list when pid doesn't exists.
 
 -- | FIXME: saveOrder
-orders :: Pipe -> IO [UserOrder]
-orders pipe = do
-    let run = access pipe master dbname
-    tags <- ( run $ find (select [] "orders") >>= rest )
-    return $ datas tags
-    where 
-        datas (Left _) = []
-        datas (Right results) = map convert results
-        convert result = UserOrder { orderId = show $ valueAt "orderId" result, orderPid = show $ valueAt "pid" result}
+saveOrder :: ByteString -> IO UserOrder
+-- saveOrder "" = ...  --^ pid could be ""
+saveOrder pid = do
+  return  UserOrder { orderId = "dumy-order-id", orderPid = bs2String pid}
 
 -- | ByteString to String
 --   exists functions? or really necessary
