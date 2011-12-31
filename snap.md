@@ -1,41 +1,40 @@
 # TODO
-  # display detail
-  # checkout
-  # testing data (json?)
-  # persiste change to mongodb
-  # src dir structure refactoring?
-  # Minify JS and CSS
+  #. checkout (save order form)
+  #. testing data prepare (json?)
+  #. persiste change to mongodb
+  #. Minify JS and CSS
+  #. src dir structure refactoring??
 
 # Questions
-2. StaticPages src
+#. StaticPages src
   HasHeist
   SnapletInit
   what mean by `addRoutes [ ("", serveStaticPages) ]` since the router url is empty
-3. snap-site src 
+    -- serveStaticPages do some route matching on its own
+
+#. snap-site src 
   makeSnaplet
   nestSnaplet
   ifTop
   bindSplices
   mapSplices
 
-4. Heist
+#. Heist
   heistLocal
   <static> tag
 
-
-
-# dir structure
+# DIR Structure
 
 design every sub site as snaplet ? check existing snaplets(mongodb)
 or following  staticPages, is it a snaplet as well?
 
 src (Types / Handler / Application )
 
-  - Internal
-  - Home
+  - Maybe Internal
+  - Home (include about, help, etc..)
   - Products
-  - About
-  - Contact
+  - Shopping cart
+  - Checkout
   - Main.hs
   - Application.hs
 
@@ -53,12 +52,14 @@ src (Types / Handler / Application )
   - Product {ID, NAME, PRICE}
   - Order {ID, NAME, PRODUCT-ID, STATUS}
   - ??more
+  - Relation Query in MongoDB
 
 ### MORE THAN A POC
   - payment service
+  - shopping cart
   - delivery method?
   - App deployment/upgrade
-
+  - localization
 
 # OTHER OPTION
   - Scala + Lift
@@ -66,3 +67,5 @@ src (Types / Handler / Application )
 # MISC
   - [babymall](https://www.babymallonline.com/)
   - [mbaobao](http://www.mbaobao.com/)
+
+# DONE

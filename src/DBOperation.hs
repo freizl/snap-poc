@@ -12,6 +12,9 @@ import Models
 
 dbname = "blog"
 
+-- | FIXME: a general list search
+--        searchList :: Pipe -> String -> ? -> IO [a]
+
 getAllTags :: Pipe -> IO [Tag]
 getAllTags pipe = do
     let run = access pipe master dbname
@@ -35,7 +38,19 @@ findProduct input = fmap findP products
     eqPid = (== input') . pid
     findP = (head . filter eqPid)
 
+-- saveOrder
+
+orders :: Pipe -> IO [Order]
+orders pipe = do
+    let run = access pipe master dbname
+    tags <- ( run $ find (select [] "orders") >>= rest )
+    return $ datas tags
+    where 
+        datas (Left _) = []
+        datas (Right results) = map convert results
+        convert result = Order { orderId = show $ valueAt "orderId" result, pid = show $ valueAt "pid" result}
+
 -- | ByteString to String
---   exists functions? or really necessary
+--   exists functions?? or really necessary
 bs2String :: ByteString -> String
 bs2String = T.unpack . T.decodeUtf8

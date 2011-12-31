@@ -1,0 +1,60 @@
+<h1 id="todo">TODO</h1>
+<ol>
+<li>checkout (save order form)</li>
+<li>testing data prepare (json?)</li>
+<li>persiste change to mongodb</li>
+<li>Minify JS and CSS</li>
+<li>src dir structure refactoring??</li>
+</ol>
+<h1 id="questions">Questions</h1>
+<ol>
+<li><p>StaticPages src HasHeist SnapletInit what mean by <code>addRoutes [ (&quot;&quot;, serveStaticPages) ]</code> since the router url is empty -- serveStaticPages do some route matching on its own</p></li>
+<li><p>snap-site src makeSnaplet nestSnaplet ifTop bindSplices mapSplices</p></li>
+<li><p>Heist heistLocal <static> tag</p></li>
+</ol>
+<h1 id="dir-structure">DIR Structure</h1>
+<p>design every sub site as snaplet ? check existing snaplets(mongodb) or following staticPages, is it a snaplet as well?</p>
+<p>src (Types / Handler / Application )</p>
+<ul>
+<li>Maybe Internal</li>
+<li>Home (include about, help, etc..)</li>
+<li>Products</li>
+<li>Shopping cart</li>
+<li>Checkout</li>
+<li>Main.hs</li>
+<li>Application.hs</li>
+</ul>
+<h1 id="some-thinkings">Some thinkings</h1>
+<h3 id="backlog">BACKLOG</h3>
+<ul>
+<li>ADMIN-Add new product</li>
+<li>ADMIN-Delete/Update a product</li>
+<li>ADMIN-List all product</li>
+<li>List products at home page</li>
+<li>View detail of a product</li>
+<li>Check out a product without login</li>
+<li>User be able to update ordering status when received</li>
+</ul>
+<h3 id="data-model">DATA MODEL</h3>
+<ul>
+<li>Product {ID, NAME, PRICE}</li>
+<li>Order {ID, NAME, PRODUCT-ID, STATUS}</li>
+<li>??more</li>
+</ul>
+<h3 id="more-than-a-poc">MORE THAN A POC</h3>
+<ul>
+<li>payment service</li>
+<li>shopping cart</li>
+<li>delivery method?</li>
+<li>App deployment/upgrade</li>
+</ul>
+<h1 id="other-option">OTHER OPTION</h1>
+<ul>
+<li>Scala + Lift</li>
+</ul>
+<h1 id="misc">MISC</h1>
+<ul>
+<li><a href="https://www.babymallonline.com/">babymall</a></li>
+<li><a href="http://www.mbaobao.com/">mbaobao</a></li>
+</ul>
+<h1 id="done">DONE</h1>

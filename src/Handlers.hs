@@ -41,6 +41,13 @@ echo = do
     heistLocal (bindString "message" (T.decodeUtf8 message)) $ render "echo"
 
 ------------------------------------------------------------------------------
+-- | checkoutDone
+checkoutDone :: AppHandler ()    
+checkoutDone = do
+    pid   <- decodedParam "pid"
+    -- FIXME Save order
+    heistLocal (bindString "message" (T.decodeUtf8 "check out done.")) $ render "echo"
+
 -- | checkout
 checkout :: AppHandler ()
 checkout = do
@@ -118,7 +125,8 @@ routes = [ ("/",            index)
          <|>
          -- Checkout sub-site
          [
-           ("/product/checkout/:pid", checkout)
+           ("/checkout/:pid", checkout)
+         , ("/checkout/done/", checkoutDone)
          ]
          <|>
          -- FIXME: admin subsite like staticPagesSite

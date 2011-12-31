@@ -17,3 +17,8 @@ data Product = Product
     , pname :: String     -- ^ Product name
     } deriving (Show)
                       
+data Order = Order
+    { orderId  :: String     -- ^ oid
+    , pid      :: String     -- ^ pid or Product ?? 
+    } deriving (Show)
+

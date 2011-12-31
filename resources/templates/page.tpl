@@ -12,9 +12,5 @@
       <apply template="page-footer"/>
     </div>
 
-    <!-- 
-       <script type="text/javascript" src="/media/js/site.js"> </script>
-    -->
-
   </body>
 </html>
