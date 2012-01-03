@@ -2,34 +2,45 @@
 
 module DBOperation where
 
+
 import           Data.ByteString (ByteString)
+import           Database.MongoDB
 import qualified Data.Text as T
 import qualified Data.Text.Encoding as T
+import qualified Snap.Snaplet.MongoDB as DB
 
-import Database.MongoDB
-
+import Application
 import Models
 
-dbname = "blog"
+dbname = "products"
+withDB = DB.withDB
 
--- | FIXME: a general list search
---        searchList :: Pipe -> String -> ? -> IO [a]
+-- FIXME: type??
+fetchList tname fn = do
+    results <- ( withDB $ find (select [] tname) >>= rest )
+    return $ datas results fn
+  where
+    datas (Left _) _   = []
+    datas (Right r) fn = map fn r
 
-getAllTags :: Pipe -> IO [Tag]
-getAllTags pipe = do
-    let run = access pipe master dbname
-    tags <- ( run $ find (select [] "tags") >>= rest )
-    return $ datas tags
-    where 
-        datas (Left _) = []
-        datas (Right results) = map convert results
-        convert result = Tag { oid = show $ valueAt "_id" result, name = show $ valueAt "name" result}
-        
+fetchValue s r = show $ valueAt s r
+
+-- | Get All Tags
+getAllTags :: AppHandler [Tag]
+getAllTags        = fetchList "tags" convertTag
+convertTag result = Tag { oid = fetchValue "_id" result,
+                          name = fetchValue "name" result}
+
+-- | Get All Products
+getProducts :: AppHandler [Product]
+getProducts     = fetchList "products" convertP
+convertP result = Product { pid = fetchValue "pid" result,
+                            pname = fetchValue "pname" result}
+
 -- | FIXME: pull DB
 products :: IO [Product]
 products = return $ zipWith Product ["1","2","3"] ["Gorriot","Ray","Simon"]
 
--- | FIXME: pull DB
 findProduct :: ByteString -> IO Product
 findProduct input = fmap findP products
   where

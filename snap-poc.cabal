@@ -1,5 +1,5 @@
 Name:                poc-product
-Version:             0.1
+Version:             0.0.1
 Synopsis:            snap-poc
 Description:         A blog application for snap framework poc
 License:             AllRightsReserved
@@ -14,7 +14,7 @@ Flag development
   Description: Whether to build the server in development (interpreted) mode
   Default: True
 
-Executable blog
+Executable snap-poc
   hs-source-dirs: src
   main-is: Main.hs
 
@@ -29,6 +29,7 @@ Executable blog
     snap == 0.7.*,
     snap-core   == 0.7.*,
     snap-server == 0.7.*,
+    snaplet-mongoDB == 0.2.*,
     text >= 0.11 && < 0.12,
     time >= 1.1 && < 1.5,
     xmlhtml == 0.1.*,

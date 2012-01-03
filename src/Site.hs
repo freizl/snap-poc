@@ -26,21 +26,21 @@ import           Snap.Snaplet.Heist
 import           Snap.Util.FileServe
 import           Text.Templating.Heist
 import           Text.XmlHtml hiding (render)
+import           Control.Concurrent.MVar
+import qualified Database.MongoDB as DB
+import Snap.Snaplet.MongoDB
 
 import           Application
 import           Handlers
-
-
-import           Control.Concurrent.MVar
-import qualified Database.MongoDB as DB
-
 
 ------------------------------------------------------------------------------
 -- | The application initializer.
 app :: SnapletInit App App
 app = makeSnaplet "app" "An snaplet example application." Nothing $ do
     sTime <- liftIO getCurrentTime
-    h <- nestSnaplet "heist" heist $ heistInit "resources/templates"
-    pipe <- liftIO $ DB.runIOE $ DB.connect $ DB.host "127.0.0.1"
+    h     <- nestSnaplet "heist" heist $ heistInit "resources/templates"
+    mongo <- nestSnaplet "mongoDB" mongoDB $ mongoDBInit (DB.host "localhost") 12 "products"
     addRoutes routes
-    return $ App h sTime pipe
+    return $ App h sTime mongo
+
+--  pipe  <- liftIO $ DB.runIOE $ DB.connect $ DB.host "localhost"

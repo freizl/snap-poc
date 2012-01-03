@@ -77,7 +77,7 @@ renderDetailP = renderP
 -- | List products 
 popProductsSplice :: Splice AppHandler
 popProductsSplice = do
-    ps <- liftIO $ DB.products
+    ps <- lift DB.getProducts
     mapSplices renderP ps
     
 -- | FIXME: producst usally display as 'matrix(3 items per line)' 
@@ -91,8 +91,7 @@ defaultSplices = [ ("tagsList", tagsListSplice)]
 
 tagsListSplice :: Splice AppHandler
 tagsListSplice = do
-    pipe <- gets _dbPipe
-    tags <- liftIO $ DB.getAllTags pipe
+    tags <- lift DB.getAllTags
     mapSplices renderTag tags
 
 renderTag:: Monad m => Tag -> Splice m
