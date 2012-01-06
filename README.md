@@ -24,7 +24,7 @@ dive into snap
 ### work with state
   - `Handler b v` has a `MonadState v` instance
   - MonadReader
-  - MonadIO, [Functional Programming with Overloading and Higher-Order Polymorphism, Mark P Jones](web.cecs.pdx.edu/~mpj/pubs/springschool95.pdf) 
+  - MonadIO, [Functional Programming with Overloading and Higher-Order Polymorphism, Mark P Jones](http://web.cecs.pdx.edu/~mpj/pubs/springschool95.pdf) 
 
 
 ## StaticPages src
