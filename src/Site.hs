@@ -23,12 +23,13 @@ import           Data.Time.Clock
 import           Snap.Core
 import           Snap.Snaplet
 import           Snap.Snaplet.Heist
+import           Snap.Snaplet.Session.Backends.CookieSession
 import           Snap.Util.FileServe
 import           Text.Templating.Heist
 import           Text.XmlHtml hiding (render)
 import           Control.Concurrent.MVar
 import qualified Database.MongoDB as DB
-import Snap.Snaplet.MongoDB
+import           Snap.Snaplet.MongoDB
 
 import           Application
 import           Handlers
@@ -40,7 +41,8 @@ app = makeSnaplet "app" "An snaplet example application." Nothing $ do
     sTime <- liftIO getCurrentTime
     h     <- nestSnaplet "heist" heist $ heistInit "resources/templates"
     mongo <- nestSnaplet "mongoDB" mongoDB $ mongoDBInit (DB.host "localhost") 12 "products"
+    s <- nestSnaplet "session" appSession $ initCookieSessionManager "log/site-key.txt" "myapp-session" (Just 600)    
     addRoutes routes
-    return $ App h sTime mongo
+    return $ App h sTime mongo s
 
 --  pipe  <- liftIO $ DB.runIOE $ DB.connect $ DB.host "localhost"

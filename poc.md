@@ -46,8 +46,4 @@ src (Types / Handler / Application )
   - localization
 
 # OTHER OPTION
-  - Scala + Lift
-
-# MISC
-  - [babymall](https://www.babymallonline.com/)
-  - [mbaobao](http://www.mbaobao.com/)
+  - Scala + Lift ??

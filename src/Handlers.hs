@@ -13,6 +13,7 @@ import           Data.Time.Clock
 import           Snap.Core
 import           Snap.Snaplet
 import           Snap.Snaplet.Heist
+import           Snap.Snaplet.Session
 import           Snap.Util.FileServe
 import           Text.Templating.Heist
 import           Text.XmlHtml hiding (render)
@@ -24,7 +25,9 @@ import           Models
 
 ------------------------------------------------------------------------------
 index :: AppHandler ()
-index = ifTop $ heistLocal (bindSplices indexSplices) $ render "home"
+index = do
+    with appSession $ withSession appSession $ setInSession "author" "Simon" 
+    ifTop $ heistLocal (bindSplices indexSplices) $ render "home"
   where
     indexSplices =
         [ ("start-time",      startTimeSplice)
@@ -39,7 +42,12 @@ index = ifTop $ heistLocal (bindSplices indexSplices) $ render "home"
 echo :: Handler App App ()
 echo = do
     message <- decodedParam "stuff"
-    heistLocal (bindString "message" (T.decodeUtf8 message)) $ render "echo"
+    sv <- with appSession $ getFromSession "author"  -- FIXME: dedicated handler display all session values
+    heistLocal (bindString "message" $ concatTexts [(T.decodeUtf8 message), getSessionValue sv]) $ render "echo"
+  where
+    getSessionValue Nothing = "nothing"
+    getSessionValue (Just v) = v
+    concatTexts xs = T.intercalate "-" xs
 
 ------------------------------------------------------------------------------
 -- | checkoutDone
@@ -77,7 +85,8 @@ renderDetailP = renderP
 -- | List products 
 popProductsSplice :: Splice AppHandler
 popProductsSplice = do
-    ps <- lift DB.getProducts
+    ps <- liftIO DB.products
+    -- ps <- DB.getProducts
     mapSplices renderP ps
     
 -- | FIXME: producst usally display as 'matrix(3 items per line)' 
