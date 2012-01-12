@@ -13,23 +13,25 @@ module Site
   ) where
 
 import           Control.Applicative
-import           Control.Monad.Trans
+import           Control.Concurrent.MVar
 import           Control.Monad.State
+import           Control.Monad.Trans
 import           Data.ByteString (ByteString)
 import           Data.Maybe
 import qualified Data.Text as T
 import qualified Data.Text.Encoding as T
+import qualified Database.MongoDB as DB
 import           Data.Time.Clock
 import           Snap.Core
 import           Snap.Snaplet
+import           Snap.Snaplet.Auth
+import           Snap.Snaplet.Auth.Backends.JsonFile
 import           Snap.Snaplet.Heist
+import           Snap.Snaplet.MongoDB
 import           Snap.Snaplet.Session.Backends.CookieSession
 import           Snap.Util.FileServe
 import           Text.Templating.Heist
 import           Text.XmlHtml hiding (render)
-import           Control.Concurrent.MVar
-import qualified Database.MongoDB as DB
-import           Snap.Snaplet.MongoDB
 
 import           Application
 import           Handlers
@@ -41,8 +43,12 @@ app = makeSnaplet "app" "An snaplet example application." Nothing $ do
     sTime <- liftIO getCurrentTime
     h     <- nestSnaplet "heist" heist $ heistInit "resources/templates"
     mongo <- nestSnaplet "mongoDB" mongoDB $ mongoDBInit (DB.host "localhost") 12 "products"
-    s <- nestSnaplet "session" appSession $ initCookieSessionManager "log/site-key.txt" "myapp-session" (Just 600)    
+    s     <- nestSnaplet "session" appSession cookieSessionMgr
+    a     <- nestSnaplet "auth" appAuth $ initJsonFileAuthManager defAuthSettings appSession "log/auth.json"    
     addRoutes routes
-    return $ App h sTime mongo s
+    addAuthSplices appAuth
+    return $ App h sTime mongo s a
+  where
+    cookieSessionMgr = initCookieSessionManager "log/my-cookies.txt" "myapp-session" (Just 600)
 
 --  pipe  <- liftIO $ DB.runIOE $ DB.connect $ DB.host "localhost"

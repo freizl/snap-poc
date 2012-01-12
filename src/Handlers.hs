@@ -11,6 +11,8 @@ import qualified Data.Text as T
 import qualified Data.Text.Encoding as T
 import           Data.Time.Clock
 import           Snap.Core
+import           Snap.Snaplet.Auth.Backends.JsonFile
+import           Snap.Snaplet.Auth
 import           Snap.Snaplet
 import           Snap.Snaplet.Heist
 import           Snap.Snaplet.Session
@@ -27,15 +29,21 @@ import           Models
 index :: AppHandler ()
 index = do
     with appSession $ withSession appSession $ setInSession "author" "Simon" 
-    ifTop $ heistLocal (bindSplices indexSplices) $ render "home"
+    user <- with appAuth currentUser    
+    ifTop $ heistLocal (bindSplices $ indexSplices user) $ render "home"
   where
-    indexSplices =
+    indexSplices user =
         [ ("start-time",      startTimeSplice)
         , ("current-time",    currentTimeSplice)
         , ("debug-info",      debugSplice)
         , ("popularProducts", popProductsSplice)
+        , ("user-id",         userSplices user)
         ] ++ defaultSplices
-
+    userSplices :: Maybe AuthUser -> Splice AppHandler
+    userSplices (Just user) = return $ [TextNode $ userLogin user]
+    userSplices Nothing     = return $ []
+    
+-- | FIXME: add global splices for login User
 
 ------------------------------------------------------------------------------
 -- | Renders the echo page.
@@ -134,11 +142,42 @@ debugSplice = do
     return $ [TextNode $ T.pack $ show "Debug: "]
     
 ------------------------------------------------------------------------------
+-- | Auth
+signup :: AppHandler ()
+signup = do
+    heistLocal (bindString "test" "Sign Up") $ render "signup"
+    
+-- | FIXME: required field validation    
+addUser :: AppHandler ()
+addUser = do
+    with appAuth $ registerUser "username" "password"
+    redirect "/"
+
+-- | FIXME: ERROR Handler, e.g. user doesnot exists, password incorrect
+--   FIXME: use `loginUser` function
+loginPost :: AppHandler ()
+loginPost = do
+    userName <- decodedParam "username"
+    password <- decodedParam "password"
+    with appAuth $ loginByUsername userName (ClearText password) True
+    redirect "/"
+loginGet = do
+    heistLocal (bindString "test" "Login") $ render "login"
+
+logoff :: AppHandler ()
+logoff = with appAuth $ logoutUser (redirect "/")
+
+------------------------------------------------------------------------------
 -- | The application's routes.
 routes :: [(ByteString, Handler App App ())]
 routes = [ ("/",             index)
          , ("/echo/:stuff",  echo)
          , ("/product/:pid", getProduct)
+         ]
+         <|>
+         [ ("/signup", method GET signup <|> method POST addUser)
+         , ("/login",  method GET loginGet <|> method POST loginPost)
+         , ("/logout", logoff)           
          ]
          <|>
          -- FIXME: Checkout sub-site

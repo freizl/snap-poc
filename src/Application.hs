@@ -13,6 +13,7 @@ import Data.Lens.Template
 import Data.Time.Clock
 import qualified Snap as Snap
 import Snap.Snaplet
+import Snap.Snaplet.Auth
 import Snap.Snaplet.Heist
 import Snap.Snaplet.MongoDB
 import Snap.Snaplet.Session
@@ -22,6 +23,7 @@ data App = App
     , _startTime :: UTCTime
     , _mongoDB   :: Snaplet MongoDBSnaplet
     , _appSession :: Snaplet SessionManager      
+    , _appAuth    :: Snaplet (AuthManager App)    
     }
 
 type AppHandler = Handler App App

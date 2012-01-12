@@ -1,4 +1,3 @@
-<static>
   <div id="heading">
     <div id="nav" class="nav">
       <ul class="nav">
@@ -6,15 +5,16 @@
           <a title="Home" href="/">Home</a>
         </li>
         <li>
-          <a title="Sign in" href="/signin">Sign In</a>
+          <a title="Sign in" href="/signup">Sign Up</a>
         </li>
-        <li>
-          <a title="Register" href="/register">Register</a>
-        </li>
-        <li class="Contact">
-          <a title="Contact Us" href="/contact">Contact</a>
-        </li>
+
+      <ifLoggedIn>
+        <li><a href="/logout">Log Out</a></li>
+      </ifLoggedIn>
+      <ifLoggedOut>
+        <li><a href="/login">Log In</a></li>
+      </ifLoggedOut>
+
       </ul>
     </div>
   </div>
-</static>

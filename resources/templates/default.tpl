@@ -12,6 +12,10 @@
       </tagsList>
     </div>
       
+      <ifLoggedIn>
+        <h3>Welcome: <user-id/></h3>
+      </ifLoggedIn>
+
     <content />
 
   </div>
