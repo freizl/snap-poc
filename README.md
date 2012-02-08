@@ -41,3 +41,14 @@ dive into snap
   - ifTop
   - bindSplices
   - mapSplices
+
+## Miscs
+1)
+All Monad extensions are Monad, which means they probably live in `do` context as well.
+Hence, with the type definition of the function, it is possible to reason about type of some general functions, e.g. `get`
+
+2)
+fn :: `Initializer App App App`
+and  `Initializer App App` is Monad
+when doing glue with do, only last one must have type `Initializer App App App` and others are `Initializer App App a`
+In other words, MonadState/MonadTransform is a Monad as well.
