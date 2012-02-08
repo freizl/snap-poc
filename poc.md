@@ -1,4 +1,5 @@
 # TODO
+  - [ ] bootstrap and dynamic nav splices
   - [ ] snaplet-mongoDB
   - [X] checkout (save order form)
   - [ ] testing data prepare (json?)
