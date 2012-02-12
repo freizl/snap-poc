@@ -23,6 +23,7 @@ fetchList tname fn = do
     datas (Left _) _   = []
     datas (Right r) fn = map fn r
 
+-- | FIXME: `show` will enclose " which is bad to UI
 fetchValue s r = show $ valueAt s r
 
 -- | Get All Tags
