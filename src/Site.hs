@@ -35,6 +35,7 @@ import           Text.XmlHtml hiding (render)
 
 import           Application
 import           Handlers
+import           Splices
 
 ------------------------------------------------------------------------------
 -- | The application initializer.
@@ -47,6 +48,7 @@ app = makeSnaplet "app" "An snaplet example application." Nothing $ do
     a     <- nestSnaplet "auth" appAuth $ initJsonFileAuthManager defAuthSettings appSession "log/auth.json"    
     addRoutes routes
     addAuthSplices appAuth
+    addNavSplices
     return $ App h sTime mongo s a
   where
     cookieSessionMgr = initCookieSessionManager "log/my-cookies.txt" "myapp-session" (Just 600)

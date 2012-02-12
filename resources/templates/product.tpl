@@ -1,9 +1,9 @@
 
-<apply template="default">
+<apply template="fluid">
 
   <bind tag="subtitle">: Product Detail</bind>
 
-  <div class="detail-container">
+  <div class="content">
     <h2>Product Detail.</h2>
 
     <showProduct>

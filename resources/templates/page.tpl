@@ -4,13 +4,11 @@
 
   <body>
     
-    <div id="main">
       <apply template="page-nav"/>
       
       <content />
       
       <apply template="page-footer"/>
-    </div>
 
   </body>
 </html>

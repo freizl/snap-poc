@@ -1,11 +1,12 @@
 # TODO
   - [ ] bootstrap and dynamic nav splices
-  - [ ] snaplet-mongoDB
+  - [X] snaplet-mongoDB
   - [X] checkout (save order form)
   - [ ] testing data prepare (json?)
   - [ ] persiste change to mongodb
   - [ ] Minify JS and CSS
   - [ ] src dir structure refactoring??
+  - [ ] localization
 
 # Questions
 ### DIR Structure

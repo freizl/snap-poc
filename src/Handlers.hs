@@ -33,11 +33,7 @@ index = do
     ifTop $ heistLocal (bindSplices $ indexSplices user) $ render "home"
   where
     indexSplices user =
-        [ ("start-time",      startTimeSplice)
-        , ("current-time",    currentTimeSplice)
-        , ("debug-info",      debugSplice)
-        , ("popularProducts", popProductsSplice)
-        , ("user-id",         userSplices user)
+        [ ("user-id",         userSplices user)
         ] ++ defaultSplices
     userSplices :: Maybe AuthUser -> Splice AppHandler
     userSplices (Just user) = return $ [TextNode $ userLogin user]
@@ -84,7 +80,7 @@ getProduct = do
     ps    <- liftIO $ fmap renderDetailP (DB.findProduct pid)
     heistLocal (bindSplices $ pSplices ps) $ render "product"
   where
-    pSplices  s = [("showProduct", s)]
+    pSplices  s = [("showProduct", s)] ++ defaultSplices
 
 renderDetailP :: Product -> Splice AppHandler
 renderDetailP = renderP
@@ -104,7 +100,12 @@ renderP p = do runChildrenWithText [("pname", T.pack $ pname p), ("pid", T.pack 
 
 
 ------------------------------------------------------------------------------
-defaultSplices = [ ("tagsList", tagsListSplice)]
+defaultSplices = [ 
+    ("tagsList",        tagsListSplice)
+  , ("start-time",      startTimeSplice)
+  , ("current-time",    currentTimeSplice)
+  , ("debug-info",      debugSplice)
+  , ("popularProducts", popProductsSplice)]
 
 tagsListSplice :: Splice AppHandler
 tagsListSplice = do
@@ -169,8 +170,14 @@ logoff = with appAuth $ logoutUser (redirect "/")
 
 ------------------------------------------------------------------------------
 -- | The application's routes.
+
+-- | work around for highlight home nav
+home :: AppHandler ()
+home = redirect "/index"
+
 routes :: [(ByteString, Handler App App ())]
-routes = [ ("/",             index)
+routes = [ ("/",             home)
+         , ("/index",        index)
          , ("/echo/:stuff",  echo)
          , ("/product/:pid", getProduct)
          ]

@@ -1,5 +1,5 @@
 <static>
-  <div id="footer">
+  <footer>
     <p>&copy;Copyright All Rights Reserved.</p>
-  </div>
+  </footer>
 </static>
