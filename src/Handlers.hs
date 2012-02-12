@@ -26,6 +26,7 @@ import           Models
 
 
 ------------------------------------------------------------------------------
+-- | FIXME: add global splices for login User
 index :: AppHandler ()
 index = do
     with appSession $ withSession appSession $ setInSession "author" "Simon" 
@@ -39,7 +40,9 @@ index = do
     userSplices (Just user) = return $ [TextNode $ userLogin user]
     userSplices Nothing     = return $ []
     
--- | FIXME: add global splices for login User
+-- FIXME: simplify session usage
+--withSession' :: Lens b (Snaplet SessionManager) -> Handler b SessionManager a -> Handler b v a
+--withSession' session = withSession session . with session
 
 ------------------------------------------------------------------------------
 -- | Renders the echo page.
