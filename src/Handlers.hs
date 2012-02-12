@@ -141,9 +141,10 @@ currentTimeSplice = do
 debugSplice :: Splice AppHandler
 debugSplice = do
     input <- getParamNode
-    liftIO $ print $ childNodes input
-    liftIO $ print $ getAttribute "author" input
-    return $ [TextNode $ T.pack $ show "Debug: "]
+    return $ [TextNode $ T.pack $ "Debug: " ++ (getAttrAuthor input)]
+  where getAttrAuthor input = case getAttribute "author" input of
+          Just x -> show x
+          Nothing -> ""
     
 ------------------------------------------------------------------------------
 -- | Auth
@@ -179,7 +180,7 @@ home :: AppHandler ()
 home = redirect "/index"
 
 routes :: [(ByteString, Handler App App ())]
-routes = [ ("/",             home)
+routes = [ ("/",             index)
          , ("/index",        index)
          , ("/echo/:stuff",  echo)
          , ("/product/:pid", getProduct)

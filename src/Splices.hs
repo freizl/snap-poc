@@ -35,8 +35,6 @@ genNavSplice links = (:[]) . X.Element "ul" [("class", "nav")] <$> do
   let li path
         | path `B.isPrefixOf` (currentURI `B.append` "/") =  X.Element "li" [("class", "active")]
         | otherwise = X.Element "li" []
-  liftIO $ print currentURI                      
-  liftIO $ print $ map (\(path, title) -> li path [buildLink path title]) links
   return $ map (\(path, title) -> li path [buildLink path title]) links
    -- build a link to the path with the given text
     where buildLink path title = X.Element "a" [("href", T.decodeUtf8 path)] [X.TextNode title]
