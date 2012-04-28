@@ -8,7 +8,7 @@ is exported by this module.
 
 -}
 
-module Site
+module Controllers.Site
   ( app
   ) where
 
@@ -34,8 +34,8 @@ import           Text.Templating.Heist
 import           Text.XmlHtml hiding (render)
 
 import           Application
-import           Handlers
-import           Splices
+import           Controllers.Handlers
+import           Views.NavSplices
 
 ------------------------------------------------------------------------------
 -- | The application initializer.

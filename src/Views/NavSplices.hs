@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Splices 
+module Views.NavSplices 
   (addNavSplices
   ) where
 

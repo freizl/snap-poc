@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings, ExtendedDefaultRules #-}
 
-module Handlers(routes) where
+module Controllers.Handlers(routes) where
 
 import           Control.Applicative
 import           Control.Monad.Trans
@@ -21,8 +21,8 @@ import           Text.Templating.Heist
 import           Text.XmlHtml hiding (render)
 
 import           Application
-import qualified DBOperation as DB       -- ^ Always use qualified or not??
-import           Models
+import qualified Models.DBOperation as DB       -- ^ Always use qualified or not??
+import           Models.Models
 
 
 ------------------------------------------------------------------------------

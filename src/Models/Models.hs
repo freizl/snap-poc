@@ -1,6 +1,7 @@
 {-# LANGUAGE OverloadedStrings, ExtendedDefaultRules #-}
 
-module Models where
+-- FIXME: separated per type 
+module Models.Models where
 
 data Tag = Tag 
     { oid  :: String     -- ^ oid

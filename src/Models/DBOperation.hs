@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings, ExtendedDefaultRules #-}
 
-module DBOperation where
+module Models.DBOperation where
 
 
 import           Data.ByteString (ByteString)
@@ -10,7 +10,7 @@ import qualified Data.Text.Encoding as T
 import qualified Snap.Snaplet.MongoDB as DB
 
 import Application
-import Models
+import Models.Models
 
 dbname = "products"
 withDB = DB.withDB

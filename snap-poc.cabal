@@ -3,8 +3,8 @@ Version:             0.0.1
 Synopsis:            snap-poc
 Description:         A blog application for snap framework poc
 License:             AllRightsReserved
-Author:              Garriot Zhang
-Maintainer:          garriot@gmail.com
+Author:              Haisheng Wu, Garriot Zhang
+Maintainer:          freizl@gmail.com
 Stability:           Experimental
 Category:            Web
 Build-type:          Simple
