@@ -1,15 +1,10 @@
 <head>
-  <title>Hard codes...<subtitle/></title>
-  <meta name="author" content="The Snap Framework Team"/>
-  <meta name="description" content="Snap Framework: a web framework for Haskell"/>
+  <title>Snap POC <subtitle/></title>
+  <meta name="author" content="freizl"/>
+  <meta name="description" content="Snap Framework POC: happly web programming"/>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   
-  <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
-
-    <style type="text/css">
-      body {
-          padding-top: 60px;
-      }
-    </style>
+  <link href="/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/css/main.css" rel="stylesheet" />
 
 </head>
