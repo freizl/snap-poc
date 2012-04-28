@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings, ExtendedDefaultRules #-}
 
-module Controllers.Handlers(routes) where
+module Controllers.Handlers where
 
 import           Control.Applicative
 import           Control.Monad.Trans
@@ -23,7 +23,7 @@ import           Text.XmlHtml hiding (render)
 import           Application
 import qualified Models.DBOperation as DB       -- ^ Always use qualified or not??
 import           Models.Models
-
+import           Controllers.Utils
 
 ------------------------------------------------------------------------------
 -- | FIXME: add global splices for login User
@@ -148,29 +148,31 @@ debugSplice = do
     
 ------------------------------------------------------------------------------
 -- | Auth
-signup :: AppHandler ()
-signup = do
-    heistLocal (bindString "test" "Sign Up") $ render "signup"
-    
--- | FIXME: required field validation    
-addUser :: AppHandler ()
-addUser = do
-    with appAuth $ registerUser "username" "password"
-    redirect "/"
-
--- | FIXME: ERROR Handler, e.g. user doesnot exists, password incorrect
---   FIXME: use `loginUser` function
-loginPost :: AppHandler ()
-loginPost = do
-    userName <- decodedParam "username"
-    password <- decodedParam "password"
-    with appAuth $ loginByUsername userName (ClearText password) True
-    redirect "/"
-loginGet = do
-    heistLocal (bindString "test" "Login") $ render "login"
-
-logoff :: AppHandler ()
-logoff = with appAuth $ logoutUser (redirect "/")
+-- signup :: AppHandler ()
+-- signup = do
+--     heistLocal (bindString "test" "Sign Up") $ render "signup"
+--     
+-- -- | FIXME: required field validation    
+-- addUser :: AppHandler ()
+-- addUser = do
+--     with appAuth $ registerUser "username" "password"
+--     redirect "/"
+-- 
+-- -- | FIXME: ERROR Handler, e.g. user doesnot exists, password incorrect
+-- --   FIXME: use `loginUser` function
+-- loginPost :: AppHandler ()
+-- loginPost = do
+--     userName <- decodedParam "username"
+--     password <- decodedParam "password"
+--     with appAuth $ loginByUsername userName (ClearText password) True
+--     redirect "/"
+--     
+-- loginGet :: AppHandler ()    
+-- loginGet = do
+--     heistLocal (bindString "test" "Login") $ render "login"
+-- 
+-- logoff :: AppHandler ()
+-- logoff = with appAuth $ logoutUser (redirect "/")
 
 ------------------------------------------------------------------------------
 -- | The application's routes.
@@ -178,32 +180,3 @@ logoff = with appAuth $ logoutUser (redirect "/")
 -- | work around for highlight home nav
 home :: AppHandler ()
 home = redirect "/index"
-
-routes :: [(ByteString, Handler App App ())]
-routes = [ ("/",             index)
-         , ("/index",        index)
-         , ("/echo/:stuff",  echo)
-         , ("/product/:pid", getProduct)
-         ]
-         <|>
-         [ ("/signup", method GET signup <|> method POST addUser)
-         , ("/login",  method GET loginGet <|> method POST loginPost)
-         , ("/logout", logoff)           
-         ]
-         <|>
-         -- FIXME: Checkout sub-site
-         [
-           ("/checkout/:pid",  method GET checkout)
-         , ("/checkout/done/", method POST checkoutDone)
-         ]
-         <|>
-         [ ("", with heist heistServe)  -- ^ could be just `"" heistServe`
-         , ("", serveDirectory "resources/static")
-         ]
-         -- FIXME: admin subsite like staticPagesSite
-
-------------------------------------------------------------------------------
--- UTIL
-
--- decodedParam :: MonadSnap f => ByteString -> f ByteString
-decodedParam p = fromMaybe "" <$> getParam p

@@ -1,40 +1,21 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-{-|
-
-This is where all the routes and handlers are defined for your site. The
-'app' function is the initializer that combines everything together and
-is exported by this module.
-
--}
-
 module Controllers.Site
   ( app
   ) where
 
-import           Control.Applicative
-import           Control.Concurrent.MVar
-import           Control.Monad.State
 import           Control.Monad.Trans
-import           Data.ByteString (ByteString)
-import           Data.Maybe
-import qualified Data.Text as T
-import qualified Data.Text.Encoding as T
 import qualified Database.MongoDB as DB
 import           Data.Time.Clock
-import           Snap.Core
 import           Snap.Snaplet
 import           Snap.Snaplet.Auth
 import           Snap.Snaplet.Auth.Backends.JsonFile
 import           Snap.Snaplet.Heist
 import           Snap.Snaplet.MongoDB
 import           Snap.Snaplet.Session.Backends.CookieSession
-import           Snap.Util.FileServe
-import           Text.Templating.Heist
-import           Text.XmlHtml hiding (render)
 
 import           Application
-import           Controllers.Handlers
+import           Controllers.Routes (routes)
 import           Views.NavSplices
 
 ------------------------------------------------------------------------------
