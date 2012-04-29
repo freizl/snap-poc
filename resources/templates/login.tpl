@@ -26,28 +26,49 @@
       </div>
     </form>
 
-    <form method="post" action="oauthlogin">
+    <form method="post" action="openidlogin">
       <fieldset>
-        <legand>OAuth Login</legand>
+        <legand>OpenID Login</legand>
       </fieldset>
 
-    <div class="clearfix">
-      <label for="openidIdentify">OpenID</label>
-      <div class="input">
-        <input type="text" class="xlarge" id="openidIdentify" name="openid_identifier" /> 
-        <input type="submit" value="Login" />
+      <div class="clearfix">
+        <label for="openidIdentify">OpenID</label>
+        <div class="input">
+          <input type="text" class="xlarge" id="openidIdentify" name="openid_identifier" /> 
+          <input type="submit" value="Login" />
+        </div>
       </div>
 
-    </div>
-
+      <div class="actions">
+        <!-- FIXME: add jquery; submit the form directly -->
+        <a title="log in with Google" href="javascript:document.getElementById('openidIdentify').value=document.getElementsByTagName('a')[5].children[0].innerText;" 
+           style="background: #fff url(http://cdn.sstatic.net/Img/openid/openid-logos.png?v=8); background-position: -1px -1px" 
+           class="openid_large_btn">
+          <span style="display: none;">https://www.google.com/accounts/o8/id</span>
+        </a>
+      </div>
     </form>
 
-    <!-- FIXME: add jquery; submit the form directly -->
+    <div style="clear:both;"></div>
 
-    <a title="log in with Google" href="javascript:document.getElementById('openidIdentify').value=document.getElementsByTagName('a')[5].children[0].innerText;" 
-       style="background: #fff url(http://cdn.sstatic.net/Img/openid/openid-logos.png?v=8); background-position: -1px -1px" 
-       class="openid_large_btn">
-      <span style="display: none;">https://www.google.com/accounts/o8/id</span>
-    </a>
+    <!-- failed to integrate with oauth because of missing https-client in snap  -->
+    <!-- 
+    <form method="post" action="oauthlogin">
+      <fieldset>
+        <legand>OpenID Login</legand>
+      </fieldset>
+
+      <div class="clearfix">
+        <label for="openidIdentify">Oauth</label>
+        <div class="input">
+          <input type="text" class="xlarge" name="test" /> 
+        </div>
+        
+        <div class="actions">
+          <input type="submit" class="btn primary" value="Submit">&nbsp;<button type="reset" class="btn">Cancel</button>
+        </div>
+      </div>
+    </form>
+    -->
 
 </apply>

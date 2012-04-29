@@ -1,4 +1,7 @@
 # TODO
+  - [ ] openid
+  - [ ] form
+  - [ ] email registration
   - [ ] bootstrap and dynamic nav splices
   - [X] snaplet-mongoDB
   - [X] checkout (save order form)
