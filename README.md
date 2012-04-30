@@ -1,4 +1,21 @@
-dive into snap
+# TODO
+  - [ ] digestive-functors form
+    + only work with snap-8.*
+  - [ ] email registration
+  - [X] bootstrap and dynamic nav splices
+  - [X] snaplet-mongoDB
+  - [X] checkout (save order form)
+  - [ ] testing data prepare (json?)
+  - [ ] persiste change to mongodb
+  - [ ] Minify JS and CSS
+  - [X] src dir structure refactoring??
+  - [ ] localization
+  - [ ] Understand Snaplet
+
+# Issues / Concerns
+  - [ ] openid / oauth
+    + need https client. anything in snap but http-conduit ?
+
 
 # notes...
 

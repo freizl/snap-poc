@@ -1,17 +1,4 @@
-# TODO
-  - [ ] digestive-functors form
-    + only work with snap-8.*
-  - [ ] email registration
-  - [ ] bootstrap and dynamic nav splices
-  - [X] snaplet-mongoDB
-  - [X] checkout (save order form)
-  - [ ] testing data prepare (json?)
-  - [ ] persiste change to mongodb
-  - [ ] Minify JS and CSS
-  - [ ] src dir structure refactoring??
-  - [ ] localization
-  - [ ] openid / oauth
-    + need https client. anything in snap but http-conduit ?
+**DEPRECATED**
 
 # Questions
 ### DIR Structure
@@ -20,7 +7,6 @@ design every sub site as snaplet ? check existing snaplets(mongodb)
 or following  staticPages, is it a snaplet as well?
 
 src (Types / Handler / Application )
-
   - Maybe Internal
   - Home (include about, help, etc..)
   - Products
