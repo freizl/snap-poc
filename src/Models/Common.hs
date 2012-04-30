@@ -28,7 +28,7 @@ fetchList tname fn = do
     return $ datas results fn
   where
     datas (Left _) _   = []
-    datas (Right r) fn = map fn r
+    datas (Right r) f = map f r
 
 bs2String :: BS.ByteString -> String
 bs2String = T.unpack . E.decodeUtf8

@@ -4,14 +4,13 @@ module Controllers.Routes where
 
 import           Control.Applicative
 import           Data.ByteString (ByteString)
-import           Data.Maybe (fromMaybe)
 import           Snap.Core
 import           Snap.Snaplet
 import           Snap.Snaplet.Heist
 import           Snap.Util.FileServe
 
 import           Application
-import           Controllers.Handlers
+import           Controllers.Home
 import           Controllers.Login
 import           Controllers.Book
 

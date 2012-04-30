@@ -3,12 +3,7 @@
 module Models.Order where
 
 import           Data.ByteString (ByteString)
-import           Database.MongoDB
-import qualified Data.Text as T
-import qualified Data.Text.Encoding as T
-import qualified Snap.Snaplet.MongoDB as DB
 
-import Application
 import Models.Common
 
 data UserOrder = UserOrder

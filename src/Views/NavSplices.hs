@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Views.NavSplices 
-  (addNavSplices
+  ( addNavSplices
   ) where
 
 import           Control.Applicative
@@ -15,7 +15,7 @@ import           Snap.Snaplet.Heist
 import qualified Text.XmlHtml as X
 import qualified Data.ByteString as B
 
-import           Application
+--import           Application
 ------------------------------------------------------------------------------
 -- | Add standard nav splices to a Heist-enabled application.
 
@@ -29,15 +29,18 @@ addNavSplices = addSplices
   [ ("nav", liftHeist $ genNavSplice pages)
   ]
   
+--genNavSplice :: (MonadTrans t, MonadSnap m, Functor (t m), Monad (t m)) =>
+ --                              [(B.ByteString, T.Text)] -> t m [X.Node]
+
 genNavSplice links = (:[]) . X.Element "ul" [("class", "nav")] <$> do
   currentURI <- lift $ rqURI <$> getRequest
   -- add the 'active' class if the href is a prefix of the current URI
-  let li path
-        | path `B.isPrefixOf` (currentURI `B.append` "/") =  X.Element "li" [("class", "active")]
+  let li apath
+        | apath `B.isPrefixOf` (currentURI `B.append` "/") =  X.Element "li" [("class", "active")]
         | otherwise = X.Element "li" []
-  return $ map (\(path, title) -> li path [buildLink path title]) links
+  return $ map (\(pathx, title) -> li pathx [buildLink pathx title]) links
    -- build a link to the path with the given text
-    where buildLink path title = X.Element "a" [("href", T.decodeUtf8 path)] [X.TextNode title]
+    where buildLink pathy title = X.Element "a" [("href", T.decodeUtf8 pathy)] [X.TextNode title]
 
 pages :: [(B.ByteString, T.Text)]
 pages = [ ("/index", "Home")

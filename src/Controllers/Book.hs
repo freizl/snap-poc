@@ -2,29 +2,18 @@
 
 module Controllers.Book where
 
-import           Control.Applicative
+
 import           Control.Monad.Trans
-import           Control.Monad.State
-import           Data.ByteString (ByteString)
-import           Data.Maybe
 import qualified Data.Text as T
 import qualified Data.Text.Encoding as T
-import           Data.Time.Clock
 import           Snap.Core
-import           Snap.Snaplet.Auth.Backends.JsonFile
-import           Snap.Snaplet.Auth
-import           Snap.Snaplet
 import           Snap.Snaplet.Heist
-import           Snap.Snaplet.Session
-import           Snap.Util.FileServe
 import           Text.Templating.Heist
-import           Text.XmlHtml hiding (render)
 
 import           Application
 import           Models.Product
 import           Models.Order
 import           Controllers.Utils
---import           Views.BookForm
 
 ----------------------------------------------------------------------
 -- | render create product form
@@ -53,21 +42,8 @@ getProduct = do
     pSplices  s = [("showProduct", s)] -- ++ defaultSplices
 
 renderDetailP :: Product -> Splice AppHandler
-renderDetailP = renderP
-
-------------------------------------------------------------------------------
--- | List products 
-popProductsSplice :: Splice AppHandler
-popProductsSplice = do
-    ps <- liftIO mockProducts
-    -- ps <- DB.getProducts
-    mapSplices renderP ps
-    
--- | FIXME: producst usally display as 'matrix(3 items per line)' 
---          and pagination rather than simple list
-renderP :: Monad m => Product -> Splice m    
-renderP p = do 
-            runChildrenWithText [("pname", T.decodeUtf8 $ pname p), ("pid", T.decodeUtf8 $ pid p)]
+renderDetailP p = do 
+            runChildrenWithText [("pname", T.decodeUtf8 $ productName p), ("pid", T.decodeUtf8 $ productId p)]
 
 
 -- | checkoutDone
@@ -76,6 +52,7 @@ checkoutDone = do
     pid  <- decodedParam "pid"
     od   <- liftIO $ saveOrder pid
     heistLocal (bindString "message" (T.pack $ show od)) $ render "echo"
+
 
 -- | checkout
 checkout :: AppHandler ()
@@ -87,5 +64,3 @@ checkout = do
     pSplices  s = [("showProduct", s)
                   -- ,("current-time", currentTimeSplice)
                   ]
-
-
