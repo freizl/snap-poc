@@ -21,9 +21,17 @@ import           Text.Templating.Heist
 import           Text.XmlHtml hiding (render)
 
 import           Application
-import qualified Models.DBOperation as DB       -- ^ Always use qualified or not??
 import           Models.Models
+import qualified Models.DBOperation as DB
 import           Controllers.Utils
+import           Controllers.Book (popProductsSplice)
+
+------------------------------------------------------------------------------
+-- | The application's routes.
+
+-- | work around for highlight home nav
+home :: AppHandler ()
+home = redirect "/index"
 
 ------------------------------------------------------------------------------
 -- | FIXME: add global splices for login User
@@ -56,60 +64,6 @@ echo = do
     getSessionValue (Just v) = v
     concatTexts xs = T.intercalate "-" xs
 
-------------------------------------------------------------------------------
--- | checkoutDone
-checkoutDone :: AppHandler ()    
-checkoutDone = do
-    pid  <- decodedParam "pid"
-    od   <- liftIO $ DB.saveOrder pid
-    heistLocal (bindString "message" (T.pack $ show od)) $ render "echo"
-
--- | checkout
-checkout :: AppHandler ()
-checkout = do
-    pid   <- decodedParam "pid"
-    ps    <- liftIO $ fmap renderDetailP (DB.findProduct pid)
-    heistLocal (bindSplices $ pSplices ps) $ render "checkout"
-  where
-    pSplices  s = [("showProduct", s)
-                  ,("current-time", currentTimeSplice)
-                  ]
-
-------------------------------------------------------------------------------
--- | Get product
-getProduct :: AppHandler ()
-getProduct = do
-    pid   <- decodedParam "pid"
-    ps    <- liftIO $ fmap renderDetailP (DB.findProduct pid)
-    heistLocal (bindSplices $ pSplices ps) $ render "product"
-  where
-    pSplices  s = [("showProduct", s)] ++ defaultSplices
-
-renderDetailP :: Product -> Splice AppHandler
-renderDetailP = renderP
-
-------------------------------------------------------------------------------
--- | List products 
-popProductsSplice :: Splice AppHandler
-popProductsSplice = do
-    ps <- liftIO DB.products
-    -- ps <- DB.getProducts
-    mapSplices renderP ps
-    
--- | FIXME: producst usally display as 'matrix(3 items per line)' 
---          and pagination rather than simple list
-renderP :: Monad m => Product -> Splice m    
-renderP p = do runChildrenWithText [("pname", T.pack $ pname p), ("pid", T.pack $ pid p)]
-
-
-------------------------------------------------------------------------------
-defaultSplices = [ 
-    ("tagsList",        tagsListSplice)
-  , ("start-time",      startTimeSplice)
-  , ("current-time",    currentTimeSplice)
-  , ("debug-info",      debugSplice)
-  , ("popularProducts", popProductsSplice)]
-
 tagsListSplice :: Splice AppHandler
 tagsListSplice = do
     tags <- lift DB.getAllTags
@@ -119,6 +73,13 @@ renderTag:: Monad m => Tag -> Splice m
 renderTag tag = do
     runChildrenWithText [("name", T.pack $ name tag), ("oid", T.pack $ oid tag)]
 
+------------------------------------------------------------------------------
+defaultSplices = [ 
+    ("tagsList",        tagsListSplice)
+  , ("start-time",      startTimeSplice)
+  , ("current-time",    currentTimeSplice)
+  , ("debug-info",      debugSplice)
+  , ("popularProducts", popProductsSplice)]
 
 ------------------------------------------------------------------------------
 -- | For your convenience, a splice which shows the start time.
@@ -174,9 +135,62 @@ debugSplice = do
 -- logoff :: AppHandler ()
 -- logoff = with appAuth $ logoutUser (redirect "/")
 
-------------------------------------------------------------------------------
--- | The application's routes.
 
--- | work around for highlight home nav
-home :: AppHandler ()
-home = redirect "/index"
+{-
+tagsListSplice :: Splice AppHandler
+tagsListSplice = do
+    tags <- lift DB.getAllTags
+    mapSplices renderTag tags
+
+renderTag:: Monad m => Tag -> Splice m
+renderTag tag = do
+    runChildrenWithText [("name", T.pack $ name tag), ("oid", T.pack $ oid tag)]
+
+------------------------------------------------------------------------------
+-- | Get product
+getProduct :: AppHandler ()
+getProduct = do
+    pid   <- decodedParam "pid"
+    ps    <- liftIO $ fmap renderDetailP (DB.findProduct pid)
+    heistLocal (bindSplices $ pSplices ps) $ render "product"
+  where
+    pSplices  s = [("showProduct", s)] ++ defaultSplices
+
+renderDetailP :: Product -> Splice AppHandler
+renderDetailP = renderP
+
+------------------------------------------------------------------------------
+-- | List products 
+popProductsSplice :: Splice AppHandler
+popProductsSplice = do
+    ps <- liftIO DB.products
+    -- ps <- DB.getProducts
+    mapSplices renderP ps
+    
+-- | FIXME: producst usally display as 'matrix(3 items per line)' 
+--          and pagination rather than simple list
+renderP :: Monad m => Product -> Splice m    
+renderP p = do runChildrenWithText [("pname", T.pack $ pname p), ("pid", T.pack $ pid p)]
+
+------------------------------------------------------------------------------
+-- | checkoutDone
+checkoutDone :: AppHandler ()    
+checkoutDone = do
+    pid  <- decodedParam "pid"
+    od   <- liftIO $ DB.saveOrder pid
+    heistLocal (bindString "message" (T.pack $ show od)) $ render "echo"
+
+-- | checkout
+checkout :: AppHandler ()
+checkout = do
+    pid   <- decodedParam "pid"
+    ps    <- liftIO $ fmap renderDetailP (mockFindProduct pid)  -- ^ FIXME: duplicated with Product Handler
+    heistLocal (bindSplices $ pSplices ps) $ render "checkout"
+  where
+    pSplices  s = [("showProduct", s)
+                  ,("current-time", currentTimeSplice)
+                  ]
+renderDetailP :: Monad m => Product -> Splice m    
+renderDetailP p = do runChildrenWithText [("pname", T.decodeUtf8 $ pname p), ("pid", T.decodeUtf8 $ pid p)]
+
+-}

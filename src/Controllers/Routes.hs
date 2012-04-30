@@ -13,12 +13,17 @@ import           Snap.Util.FileServe
 import           Application
 import           Controllers.Handlers
 import           Controllers.Login
+import           Controllers.Book
 
 routes :: [(ByteString, Handler App App ())]
 routes = [ ("/",             index)
          , ("/index",        index)
          , ("/echo/:stuff",  echo)
-         , ("/product/:pid", getProduct)
+         ]
+         <|>
+         [ ("/book/:pid", getProduct)
+         -- can not be REST. this bug has been fix in 0.8, 
+         -- ("/book", method GET book <|> method POST addBook)
          ]
          <|>
          [ ("/signup", method GET signup <|> method POST addUser)

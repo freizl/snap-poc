@@ -11,6 +11,16 @@ default: build
 clean:
 	rm -rf $(DIST)
 
+## Enable Development mode
+conf-dev:
+	cabal --flags="development" configure
+
+build-dev: conf-dev
+	cabal build
+
+bp: build-dev preview
+
+
 conf:
 	cabal configure
 
@@ -19,12 +29,7 @@ build: conf
 
 rebuild: clean build
 
-preview:
+preview: build
 	$(PROG_PREV) -p 8800
 
-p: preview
-
-bp: build preview
-
-rp: rebuild preview
 

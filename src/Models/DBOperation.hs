@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings, ExtendedDefaultRules #-}
 
-module Models.DBOperation where
-
+module Models.DBOperation 
+       ( getAllTags) where
 
 import           Data.ByteString (ByteString)
 import           Database.MongoDB
@@ -32,6 +32,25 @@ getAllTags        = fetchList "tags" convertTag
 convertTag result = Tag { oid = fetchValue "_id" result,
                           name = fetchValue "name" result}
 
+
+
+
+-- | ByteString to String
+--   exists functions? or really necessary
+-- ?? import qualified Data.ByteString.Char8 as U
+--    :t U.unpack ??
+bs2String :: ByteString -> String
+bs2String = T.unpack . T.decodeUtf8
+
+{-
+
+-- | FIXME: saveOrder
+saveOrder :: ByteString -> IO UserOrder
+-- saveOrder "" = ...  --^ pid could be ""
+saveOrder pid = do
+  return  UserOrder { orderId = "dumy-order-id", orderPid = bs2String pid}
+
+
 -- | Get All Products
 getProducts :: AppHandler [Product]
 getProducts     = fetchList "products" convertP
@@ -49,15 +68,4 @@ findProduct input = fmap findP products
     eqPid = (== input') . pid
     findP = (head . filter eqPid)   -- ^ FIXME: head will agianst empty list when pid doesn't exists.
 
--- | FIXME: saveOrder
-saveOrder :: ByteString -> IO UserOrder
--- saveOrder "" = ...  --^ pid could be ""
-saveOrder pid = do
-  return  UserOrder { orderId = "dumy-order-id", orderPid = bs2String pid}
-
--- | ByteString to String
---   exists functions? or really necessary
--- ?? import qualified Data.ByteString.Char8 as U
---    :t U.unpack ??
-bs2String :: ByteString -> String
-bs2String = T.unpack . T.decodeUtf8
+-}

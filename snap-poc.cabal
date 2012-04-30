@@ -12,7 +12,7 @@ Cabal-version:       >=1.2
 
 Flag development
   Description: Whether to build the server in development (interpreted) mode
-  Default: True
+  Default: False
 
 Executable snap-poc
   hs-source-dirs: src
@@ -26,7 +26,7 @@ Executable snap-poc
     heist >= 0.7 && < 0.8,
     MonadCatchIO-transformers >= 0.2.1 && < 0.3,
     mtl >= 2 && < 3,
-    snap == 0.7.*,
+    snap >= 0.7 && < 0.9,
     snap-core   == 0.7.*,
     snap-server == 0.7.*,
     snaplet-mongoDB == 0.2.*,
@@ -34,6 +34,8 @@ Executable snap-poc
     time >= 1.1 && < 1.5,
     xmlhtml == 0.1.*,
     mongoDB == 1.*
+--  digestive-functors-snap == 0.3.2.0,
+--  digestive-functors-heist == 0.3.0.1
 
   if flag(development)
     cpp-options: -DDEVELOPMENT

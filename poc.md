@@ -1,6 +1,6 @@
 # TODO
-  - [ ] openid
-  - [ ] form
+  - [ ] digestive-functors form
+    + only work with snap-8.*
   - [ ] email registration
   - [ ] bootstrap and dynamic nav splices
   - [X] snaplet-mongoDB
@@ -10,6 +10,8 @@
   - [ ] Minify JS and CSS
   - [ ] src dir structure refactoring??
   - [ ] localization
+  - [ ] openid / oauth
+    + need https client. anything in snap but http-conduit ?
 
 # Questions
 ### DIR Structure
