@@ -6,29 +6,29 @@ module Controllers.Book where
 import           Control.Monad.Trans
 import qualified Data.Text as T
 import qualified Data.Text.Encoding as T
-import           Snap.Core
+--import           Snap.Core
 import           Snap.Snaplet.Heist
 import           Text.Templating.Heist
+import           Text.Digestive.Heist
+import           Text.Digestive.Snap
 
 import           Application
 import           Models.Product
 import           Models.Order
 import           Controllers.Utils
+import           Views.BookForm
 
 ----------------------------------------------------------------------
 -- | render create product form
 
-book :: AppHandler ()
-book = redirect "/"
---    (view, result) <- runForm "form" bookForm
---    case result of
---        Just x -> heistLocal (bindUser x) $ render "book"
---        Nothing -> heistLocal (bindDigestiveSplices view) $ render "book-form"
---  where
---    bindUser = bindString "book" . T.pack . show
-
 addBook :: AppHandler ()
-addBook = redirect "/"
+addBook = do
+    (view, result) <- runForm "form" bookForm
+    case result of
+        Just x -> heistLocal (bindBook x) $ render "book"
+        Nothing -> heistLocal (bindDigestiveSplices view) $ render "book-form"
+  where
+    bindBook = bindString "book" . T.pack . show
 
 
 ------------------------------------------------------------------------------

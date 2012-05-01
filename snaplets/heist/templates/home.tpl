@@ -21,7 +21,7 @@
         <div class="span">
           <h2><pname/></h2>
           <p>ID: <pid/>, NAME: <pname/></p>
-          <p><a class="btn" href="/book/${pid}">View details &raquo;</a></p>
+          <p><a class="btn" href="/product/${pid}">View details &raquo;</a></p>
         </div>
       </popularProducts>
     </div>

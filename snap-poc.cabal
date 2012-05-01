@@ -24,6 +24,7 @@ Executable snap-poc
     bytestring                >= 0.9.1 && < 0.10,
     data-lens                 >= 2.0.1 && < 2.1,
     data-lens-template        >= 2.1   && < 2.2,
+    digestive-functors        >= 0.3   && < 0.4,
     digestive-functors-heist  >= 0.3   && < 0.4,
     digestive-functors-snap   >= 0.3   && < 0.4,
     heist                     >= 0.8   && < 0.9,

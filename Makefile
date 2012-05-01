@@ -24,7 +24,9 @@ rp: clean build-dev preview
 conf:
 	cabal configure
 
-build: conf
+build: conf buildo
+	
+buildo:
 	cabal build
 
 rebuild: clean build

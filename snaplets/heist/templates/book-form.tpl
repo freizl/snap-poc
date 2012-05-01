@@ -1,18 +1,38 @@
-<dfForm action="/">
-<dfChildErrorList ref="" />
+<apply template="hero">
 
-<dfLabel ref="name">Name: </dfLabel>
-<dfInputText ref="name" />
-<br>
+  <bind tag="subtitle">: Add new Book</bind>
+  
+  <div class="content">
 
-<dfLabel ref="description">Description: </dfLabel>
-<dfInputText ref="description" />
-<br>
+	<dfForm action="/book">
+	<dfChildErrorList ref="" />
 
-<dfLabel ref="language">Language: </dfLabel>
-<dfInputSelect ref="language" />
-<br>
+    <div class="clearfix">
+		<dfLabel ref="name">Name: </dfLabel>
+		<div class="input">
+			<dfInputText ref="name" />
+		</div>
+	</div>
 
-<dfInputSubmit value="Submit" />
+	<div class="clearfix">
+		<dfLabel ref="description">Description: </dfLabel>
+		<div class="input">
+			<dfInputText ref="description" />
+		</div>
+	</div>
 
-</dfForm>
+	<div class="clearfix">
+		<dfLabel ref="language">Language: </dfLabel>
+		<div class="input">
+			<dfInputSelect ref="language" />
+		</div>
+	</div>
+
+	<div class="actions">
+		<dfInputSubmit value="Submit" class="btn primary" />
+	</div>
+
+	</dfForm>
+  </div>
+
+</apply>

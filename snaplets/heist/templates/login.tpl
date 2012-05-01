@@ -28,7 +28,7 @@
 
     <form method="post" action="openidlogin">
       <fieldset>
-        <legand>OpenID Login</legand>
+        <legand>OpenID Login (NOT READY YET)</legand>
       </fieldset>
 
       <div class="clearfix">

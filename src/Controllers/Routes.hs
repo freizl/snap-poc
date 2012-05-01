@@ -20,9 +20,11 @@ routes = [ ("/",             index)
          , ("/echo/:stuff",  echo)
          ]
          <|>
-         [ ("/book/:pid", getProduct)
-         -- can not be REST. this bug has been fix in 0.8, 
-         -- ("/book", method GET book <|> method POST addBook)
+         [ ("/product/:pid", getProduct)
+         ]
+         <|>
+         [ ("/book", addBook)   -- ^ even URL /book/123 will direct to this handler??
+         
          ]
          <|>
          [ ("/signup", method GET signup <|> method POST addUser)
