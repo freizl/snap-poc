@@ -37,6 +37,6 @@ routes = [ ("/",             index)
          ]
          <|>
          [ ("", with heist heistServe)  -- ^ could be just `"" heistServe`
-         , ("", serveDirectory "resources/static")
+         , ("", serveDirectory "static")
          ]
          -- FIXME: admin subsite like staticPagesSite
