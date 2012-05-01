@@ -19,7 +19,7 @@ build-dev: conf-dev
 	cabal build
 
 bp: build-dev preview
-
+rp: clean build-dev preview
 
 conf:
 	cabal configure
@@ -29,7 +29,7 @@ build: conf
 
 rebuild: clean build
 
-preview: build
+preview:
 	$(PROG_PREV) -p 8800
-
+p: preview
 
