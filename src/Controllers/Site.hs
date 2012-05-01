@@ -23,7 +23,7 @@ import           Views.NavSplices
 app :: SnapletInit App App
 app = makeSnaplet "app" "An snaplet example application." Nothing $ do
     sTime <- liftIO getCurrentTime
-    h     <- nestSnaplet "heist" heist $ heistInit "resources/templates"
+    h     <- nestSnaplet "heist" heist $ heistInit "templates"
     mdb   <- nestSnaplet "mongoDB" mongoDB $ mongoDBInit (DB.host "localhost") 12 "products"
     s     <- nestSnaplet "session" appSession cookieSessionMgr
     a     <- nestSnaplet "auth" appAuth $ initJsonFileAuthManager defAuthSettings appSession "log/auth.json"    
