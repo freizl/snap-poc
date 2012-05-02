@@ -9,6 +9,7 @@
       <content />
       
       <apply template="page-footer"/>
+      <apply template="page-bottom-js"/>
 
   </body>
 </html>

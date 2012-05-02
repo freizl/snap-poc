@@ -6,5 +6,6 @@
   
   <link href="/css/bootstrap.min.css" rel="stylesheet" />
   <link href="/css/main.css" rel="stylesheet" />
+  <link href="/css/markdown.css" rel="stylesheet" />
 
 </head>

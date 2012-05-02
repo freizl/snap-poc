@@ -15,16 +15,21 @@
 	</div>
 
 	<div class="clearfix">
-		<dfLabel ref="description">Description: </dfLabel>
+		<dfLabel ref="language">Language: </dfLabel>
 		<div class="input">
-			<dfInputText ref="description" />
+			<dfInputSelect ref="language" />
 		</div>
 	</div>
 
 	<div class="clearfix">
-		<dfLabel ref="language">Language: </dfLabel>
+		<dfLabel ref="description">Description: </dfLabel>
 		<div class="input">
-			<dfInputSelect ref="language" />
+          <div class="wmd-panel">
+            <div id="wmd-button-bar"></div>
+<!--		 id="wmd-input". Buggy: pagedown editor find elements by ids but df set its default id value -->
+			<dfInputTextArea ref="description" class="wmd-input" />
+          </div>
+          <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
 		</div>
 	</div>
 
