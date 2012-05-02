@@ -1,5 +1,8 @@
 # TODO
-  - [ ] digestive-functors form
+  - [ ] pagedown Markdown intergration.
+  - [ ] Admin snaplet like admin site of Django??
+    + easy for admin models
+  - [X] digestive-functors form
     + only work with snap-8.*
   - [ ] email registration
   - [X] bootstrap and dynamic nav splices
