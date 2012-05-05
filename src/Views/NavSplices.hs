@@ -44,6 +44,6 @@ genNavSplice links = (:[]) . X.Element "ul" [("class", "nav")] <$> do
 
 pages :: [(B.ByteString, T.Text)]
 pages = [ ("/index", "Home")
-        , ("/echo/Books/", "Books")
+        , ("/Book", "Book")
         , ("/echo/About/", "About")
         ]

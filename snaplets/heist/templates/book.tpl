@@ -5,6 +5,10 @@
   <div class="hero-unit">
 	<h1>Book <name/></h1>
 	<p><book/></p>
+    <html>
+      <name />
+    </html>
+
   </div>
   
 </apply>
