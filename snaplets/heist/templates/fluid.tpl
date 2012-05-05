@@ -1,6 +1,6 @@
 <apply template="page" >
 
-  <!-- Navigation -->
+  <!-- Navigation 
 <div class="topbar">
   <div class="topbar-inner">
     <div class="container-fluid">
@@ -17,6 +17,7 @@
     </div>
   </div>
 </div>
+-->
 
   <div class="container-fluid">
     <div class="sidebar">

@@ -1,9 +1,6 @@
-<apply template="page" >
-
-  <!-- Navigation
 <div class="topbar">
   <div class="topbar-inner">
-    <div class="container">
+    <div class="container-fluid">
       <a class="brand" href="#">Happy Snap</a>
       <nav />
       <p class="pull-right">Logged in as
@@ -17,8 +14,4 @@
     </div>
   </div>
 </div>
- -->
-  <div class="container">
-    <content />
-  </div>
-</apply>
+
