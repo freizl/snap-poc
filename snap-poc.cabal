@@ -1,5 +1,5 @@
 Name:                poc-product
-Version:             0.2.0
+Version:             0.2.1
 Synopsis:            snap-poc
 Description:         A blog application for snap framework poc
 License:             AllRightsReserved
@@ -36,7 +36,8 @@ Executable snap-poc
     snaplet-mongoDB           >= 0.2.1 && < 0.3,
     text                      >= 0.11  && < 0.12,
     time                      >= 1.1   && < 1.5,
-    xmlhtml == 0.1.*
+    xmlhtml                   >= 0.1   && < 0.2,
+    pandoc                    >= 1.9   && < 2.0
 
   if flag(development)
     cpp-options: -DDEVELOPMENT

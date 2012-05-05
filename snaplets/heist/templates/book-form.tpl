@@ -1,7 +1,7 @@
 <apply template="hero">
 
   <bind tag="subtitle">: Add new Book</bind>
-  
+
   <div class="content">
 
 	<dfForm action="/book">

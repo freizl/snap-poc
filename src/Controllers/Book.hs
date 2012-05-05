@@ -6,7 +6,6 @@ module Controllers.Book where
 import           Control.Monad.Trans
 import qualified Data.Text as T
 import qualified Data.Text.Encoding as T
---import           Snap.Core
 import           Snap.Snaplet.Heist
 import           Text.Templating.Heist
 import           Text.Digestive.Heist
@@ -17,6 +16,7 @@ import           Models.Product
 import           Models.Order
 import           Controllers.Utils
 import           Views.BookForm
+import           Views.MarkdownSplices
 
 ----------------------------------------------------------------------
 -- | render create product form
@@ -25,11 +25,11 @@ addBook :: AppHandler ()
 addBook = do
     (view, result) <- runForm "form" bookForm
     case result of
-        Just x -> heistLocal (bindBook x) $ render "book"
+        Just x -> heistLocal ((bindBook x) . (bindSplices [("content", contentSplice x)])) $ render "book"
         Nothing -> heistLocal (bindDigestiveSplices view) $ render "book-form"
   where
-    bindBook = bindString "book" . T.pack . show
-
+    bindBook b = bindStrings [ ("book", T.pack $ show b) ]
+    contentSplice = markdownToHtmlSplice . description
 
 ------------------------------------------------------------------------------
 -- | Get product

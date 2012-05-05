@@ -25,7 +25,7 @@ conf:
 	cabal configure
 
 build: conf buildo
-	
+
 buildo:
 	cabal build
 
