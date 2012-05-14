@@ -72,3 +72,7 @@ fn :: `Initializer App App App`
 and  `Initializer App App` is Monad
 when doing glue with do, only last one must have type `Initializer App App App` and others are `Initializer App App a`
 In other words, MonadState/MonadTransform is a Monad as well.
+
+3)
+`modifyResponse $ setContentType "application/json"`
+
