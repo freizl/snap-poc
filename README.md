@@ -76,3 +76,5 @@ In other words, MonadState/MonadTransform is a Monad as well.
 
 3)
 getRequest in Handler
+`modifyResponse $ setContentType "application/json"`
+
