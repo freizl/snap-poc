@@ -6,7 +6,7 @@
 	<h1>Book <name/></h1>
 	<p><book/></p>
 
-    <content></content>
+    <bookContent />
 
   </div>
   

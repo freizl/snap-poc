@@ -3,7 +3,9 @@ module Views.BookForm where
 
 import Control.Applicative ((<$>), (<*>))
 
+import Data.Maybe
 import Data.Text (Text)
+import qualified Data.Text as T
 import Text.Digestive
 
 data Lang = EN | CN
@@ -17,6 +19,12 @@ data Book = Book
 
 bookForm :: Monad m => Form Text m Book
 bookForm = Book
-    <$> "name" .: text (Just "Real World Haskell")
+    <$> "name" .: check "Book Name is Required." requiredBookName (text Nothing)
     <*> "description" .: text Nothing
     <*> "language" .: choice [(EN, "English"), (CN, "Chinese")] Nothing
+
+requiredBookName :: Text -> Bool
+requiredBookName = not . T.null
+
+checkEmail :: Text -> Bool
+checkEmail = isJust . T.find (== '@')

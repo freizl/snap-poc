@@ -1,5 +1,6 @@
 # TODO
-  - [ ] pagedown Markdown intergration.
+  - [X] pagedown Markdown intergration.
+    + did some fix to digestive-functor-heist
   - [ ] Admin snaplet like admin site of Django??
     + easy for admin models
   - [X] digestive-functors form
@@ -72,3 +73,6 @@ fn :: `Initializer App App App`
 and  `Initializer App App` is Monad
 when doing glue with do, only last one must have type `Initializer App App App` and others are `Initializer App App a`
 In other words, MonadState/MonadTransform is a Monad as well.
+
+3)
+getRequest in Handler

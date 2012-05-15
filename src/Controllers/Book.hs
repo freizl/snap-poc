@@ -25,7 +25,7 @@ addBook :: AppHandler ()
 addBook = do
     (view, result) <- runForm "form" bookForm
     case result of
-        Just x -> heistLocal ((bindBook x) . (bindSplices [("content", contentSplice x)])) $ render "book"
+        Just x -> heistLocal ((bindBook x) . (bindSplices [("bookContent", contentSplice x)])) $ render "book"
         Nothing -> heistLocal (bindDigestiveSplices view) $ render "book-form"
   where
     bindBook b = bindStrings [ ("book", T.pack $ show b) ]
