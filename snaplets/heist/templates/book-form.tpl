@@ -26,7 +26,6 @@
 		<div class="input">
           <div class="wmd-panel">
             <div id="wmd-button-bar"></div>
-<!--		 id="wmd-input". Buggy: pagedown editor find elements by ids but df set its default id value -->
 			<dfInputTextArea ref="description" class="wmd-input" id="wmd-input" />
           </div>
           <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
